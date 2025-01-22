@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="res_group_form_inherit" model="ir.ui.view">
+        <field name="name">res.groups.form.inherit</field>
+        <field name="model">res.groups</field>
+        <field name="inherit_id" ref="base.view_groups_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='share']" position="after">
+                <field name="isImportLines"/>
+                <field name="isBulkDelete"/>
+                <field name="isResetToDraft"/>
+                <field name="isApproveBlBtl"/>
+                <field name="isApproveWD" />
+                <field name="isShowBackofficeLine" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

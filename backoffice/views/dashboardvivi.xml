@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form Filter -->
+    <!-- DP -->
+    <record id="backofficereportdashboardvivi_filter_form" model="ir.ui.view">
+        <field name="name">backofficereportdashboard.vivi.filter.form</field>
+        <field name="model">bo.vivi.dashboard.report</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <form string="">
+                <group name="filter" string="Filter">
+                    <field name="website" />
+                    <field name="bank" />
+                    <field name="month" />
+                    <field name="year" />
+                    <field name="header_ids" invisible="1"/>
+                    <field name="line_ids" invisible="1"/>
+                    <field name="bank_header_ids" invisible="1"/>
+                    <field name="daily_summary" />
+                    <field name="daily_summary_wd" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_backoffice_report_dashboard_vivi" model="ir.actions.act_window">
+        <field name="name">backoffice.report.dashboard.vivi</field>
+        <field name="res_model">bo.vivi.dashboard.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="backofficereportdashboardvivi_filter_form"/>
+    </record>
+    <!-- DP -->
+
+    <!-- WD -->
+    
+    <!-- WD -->
+    <!-- Form Filter -->
+
+    <!-- Dashboard view -->
+    <record id="backoffice_dashboard_vivi_view_dashboard" model="ir.ui.view">
+        <field name="name">Dashboard Backoffice Vivi Form</field>
+        <field name="model">board.board</field>
+        <field name="priority" eval="30" />
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="dashboardvivi">
+                <board style="1">
+                    <column>
+                        <action name="%(act_backoffice_report_dashboard_vivi)d" string="Vivi Dashboard Analysis" />
+                    </column>
+                </board>
+            </form>
+        </field>
+    </record>
+    <!-- Dashboard view -->
+
+</odoo>

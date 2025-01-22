@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- <record id="res_config_settings_view_form" model="ir.ui.view">
+     <field name="name">res.config.settings.view.form.inherit.backoffice</field>
+     <field name="model">res.config.settings</field>
+     <field name="priority" eval="15"/>
+     <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+     <field name="arch" type="xml">
+         <xpath expr="//div[hasclass('settings')]" position="inside">
+             <div class="app_settings_block" data-string="Backoffice" string="BackOffice" data-key="backoffice">
+                 <h2>Back Office Setup</h2>
+                 <div class="row mt16 o_settings_container">
+                     <div class="col-12 col-lg-6 o_setting_box">
+                         <div class="o_setting_left_pane"/>
+                         <div class="o_setting_right_pane">
+                             <span class="o_form_label">Sales Account</span>
+                             <div class="text-muted content-group mt16">
+                                 <field name="sales_account" />
+                             </div>
+                             <span class="o_form_label">Bank Account</span>
+                             <div class="text-muted content-group mt16">
+                                 <field name="bank_account" />
+                             </div>
+                             <span class="o_form_label">AR Account</span>
+                             <div class="text-muted content-group mt16">
+                                 <field name="ar_account" />
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </xpath>
+     </field>
+ </record> -->
+
+</odoo>

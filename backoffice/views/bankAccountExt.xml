@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="res_partner_bank_tree_inherit_partner_bank" model="ir.ui.view">
+        <field name="name">res.partner.bank.tree.inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <button name="action_view_bo_lines" type="object" string="Details"/>
+                <!-- <field name="balance_per_bank"/> -->
+            </xpath>
+            <xpath expr="//field[@name='bank_name']" position="after">
+                <!-- <field name="balance_per_bank"/> -->
+                <field name="balance_per_bank2"/>
+            </xpath>
+            <xpath expr="//field[@name='acc_number']" position="after">
+                <field name="reference_name" />
+                <field name="acc_holder_name"/>
+                <field name="location"/>
+                <field name="location_detail"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_bank_form_inherit_partner_bank" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_id']" position="after">
+                <field name="max_limit" />
+                <!-- <field name="initial_balance" /> -->
+                <field name="type" />
+                <field name="expired_date" />
+                <field name="balance_per_bank2" />
+                <field name="reference_name" />
+                <field name="user_id" />
+                <field name="password" />
+                <field name="token" />
+                <!-- <field name="borrow_amount" />
+                <field name="return_amount" />
+                <field name="borrow_return_balance" /> -->
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="location" />
+                <field name="location_detail" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Rekap Masa Aktif -->
+
+    <!-- Record rule BankAccount -->
+    <record id="bankaccount_visibility_website_bankaccount" model="ir.rule">
+        <field name="name">Only see his/her website BankAccount</field>
+        <field name="model_id" ref="model_res_partner_bank"/>
+        <field name="domain_force">[('bank_id.websites', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+        <field name = "perm_read" eval = "True" /> 
+        <field name = "perm_write" eval = "True" /> 
+        <field name = "perm_create" eval = "True" /> 
+        <field name = "perm_unlink" eval = "True" /> 
+    </record>
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+    <!--User-->
+    <record id="bo_user_group" model="res.groups">
+        <field name="name">BoUser</field>
+        <field name="category_id" ref="base.module_category_services_backoffice"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Leader -->
+    <record id="bo_leader_group" model="res.groups">
+        <field name="name">BoLeader</field>
+        <field name="category_id" ref="base.module_category_services_backoffice" />
+    </record>
+
+    <!-- UserAdmin -->
+    <record id="bo_user_admin_group" model="res.groups">
+        <field name="name">BoUserAdmin</field>
+        <field name="category_id" ref="base.module_category_services_backoffice" />
+    </record>
+
+    <!--Admin-->
+    <record id="bo_admin_group" model="res.groups">
+        <field name="name">BoAdministrator</field>
+        <field name="category_id" ref="base.module_category_services_backoffice" />
+        <!-- <field name="implied_ids" eval="[(4, ref('bo_user_group'))]"></field> -->
+        <!-- <field name="users"
+           eval="[(4, ref('base.user_root')),
+                  (4, ref('base.user_admin'))]"/> -->
+    </record>
+
+    <!-- <record id="bo_website_record_le" model="ir.rule">
+        <field name="name">Restrict Website Backoffice</field>
+        <field name="model_id" ref="model_bo_website"/>
+        <field name="domain_force">[('id', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+    </record> -->
+
+    </data>
+
+</odoo>

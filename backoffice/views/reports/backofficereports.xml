@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="report_qweb_paperformat_backoffice_a4" model="report.paperformat">
+            <field name="name">Backoffice Report A4</field>
+            <field name="default" eval="True"/>            
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field> 
+            <field name="orientation">Portrait</field> <!-- Landscape -->
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+    </record>
+
+    <!-- <record id="action_report_backoffice" model="ir.actions.report">
+        <field name="name">Backoffice Report</field>
+        <field name="model">bo.header</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">backoffice.report_backoffice</field>
+        <field name="report_file">backoffice.report_backoffice</field>
+        <field name="print_report_name">'%s' % object.name</field>
+        <field name="binding_model_id" ref="model_bo_header"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="report_qweb_paperformat_backoffice_a4"/>
+    </record> -->
+
+    <template id="report_backoffice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <!-- Style -->
+                        <style>
+                            @page {
+                                size: A4;
+                                margin: 0;
+                            }
+                            table {
+                                border-collapse: collapse;
+                                width: 100%;
+                            }
+
+                            .report {
+                                border: 2px solid #000000;
+                                border-radius: 5px;
+                                padding: 10px;
+                                margin-bottom: 10px;
+                            }
+        
+                            th, td {
+                                border: 1px solid #000000;
+                                text-align: left;
+                                padding: 12px;
+                            }
+                                
+                            th {
+                                background-color: #31afd4;
+                                font-weight: bold;
+                                font-color: #902d41;
+                                text-transform: uppercase;
+                            }
+                                
+                            h2 {
+                                text-align: center;
+                                margin-bottom: 20px;
+                            }
+
+                            .page {
+                                page-break-after: always;
+                            }
+
+                            .page:last-child {
+                                page-break-after: never;
+                            }
+
+                            .page-number:after {
+                                content: counter(page);
+                            }
+
+                            @page {
+                                @bottom-right {
+                                    content: "Page " counter(page);
+                                }
+                            }
+
+                            .page-break {
+                                page-break-after: always;
+                            }
+
+                            .page-break:last-child {
+                                page-break-after: never;
+                            }
+                        </style>
+                        <!-- Style -->
+
+                        <!-- Report -->
+
+                        <!-- Backoffice -->
+                        <h2>REPORT TANGGAL <span t-field="o.date" t-options='{"format": "dd MMMM yyyy"}' /> </h2>
+                        <div class="report">
+                                <h2>Backoffice Information</h2>
+                                <table>
+                                    <tr>
+                                        <th>Website</th>
+                                        <td>
+                                            <span t-field="o.website.name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama CS</th>
+                                        <td>
+                                            <span t-field="o.piclines" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Staff Local</th>
+                                        <td>
+                                            <span t-field="o.piclinesLocal" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Staff Local PH</th>
+                                        <td>
+                                            <span t-field="o.piclinesLocalPH" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shift</th>
+                                        <td>
+                                            <span t-field="o.shift" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Selisih atau Tidak</th>
+                                        <td>
+                                            Awaiting information dulu
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total DP</th>
+                                        <td>
+                                            <span t-field="o.total_deposit_date" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total WD</th>
+                                        <td>
+                                            <span t-field="o.total_withdraw_date" />
+                                        </td>
+                                    </tr>
+                                </table>
+                        </div>
+                        <!-- Backoffice -->
+
+                        <!-- Bonus -->
+                        <div class="report">
+                            <h2>Bonuses</h2>
+                            <table>
+                                <tr>
+                                    <th>Bonus</th>
+                                    <th>Total</th>
+                                </tr>
+                                <t t-foreach="nominal_sum_by_type.items()" t-as="data">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="data[0]"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="data[1]" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <!-- Bonus -->
+
+                        <!-- Transactions -->
+                        <div class="report">
+                            <h2>Transaction Details</h2>
+                                    <table>
+                                        <tr>
+                                            <th>Total Hutang Tampung</th>
+                                            <td>Pending</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total QRIS Sebelumnya</th>
+                                            <td>Awaiting information dulu</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Pending QRIS</th>
+                                            <td>Awaiting information dulu</td>
+                                        </tr>
+
+                                    </table>
+                        </div>
+                        <!-- Transactions -->
+
+                        <!-- PD -->
+                        <div class="report">
+                            <h2>Pindah Dana (PD)</h2>
+                            <table>
+                                <tr>
+                                    <th>From Bank</th>
+                                    <th>To Bank</th>
+                                    <th>Nominal</th>
+                                </tr>
+                                <t t-foreach="nominal_sum_by_kategori_pd.items()" t-as="item">
+                                    <tr>
+                                        <td>
+                                            <span t-field="o.bank_account.acc_number" />
+                                        </td>
+                                        <td>
+                                            <t t-esc="item[0]"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="item[1]" t-options='{"widget": "float", "precision": 2}' />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <!-- PD -->
+                        
+                        <!-- Report -->
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

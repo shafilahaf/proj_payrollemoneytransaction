@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- bo.bonus.header tree view -->
+    <record id="bo_bonus_header_view_tree" model="ir.ui.view">
+        <field name="name">bo.bonus.header.view.tree</field>
+        <field name="model">bo.bonus.header</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="date" />
+                <field name="website" />
+                <field name="total_deposit" />
+                <field name="total_wd" />              
+            </tree>
+        </field>
+    </record>
+
+    <!-- bonus search -->
+    <record id="bo_bonus_view_search" model="ir.ui.view">
+        <field name="name">bo.bonus.view.search</field>
+        <field name="model">bo.bonus.header</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- bo.bonus.header form view -->
+    <record id="bo_bonus_header_view_form" model="ir.ui.view">
+        <field name="name">bo.bonus.header.view.form</field>
+        <field name="model">bo.bonus.header</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                     <button name="fnOpenWizard" string="Import Lines" type="object" class="oe_highlight"  />              
+                </header>
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                <field name="active" invisible="1"/>
+                <div class="oe_title">
+                    <label for="name" string="Name">Name</label>
+                     <h2><field name="name" force_save="1"/></h2>
+                </div>
+
+                <group col="2">
+
+                    <group>
+                        <field name="date" />
+                        <field name="website" />
+                        <field name="shift" />
+                    </group>
+                    <group>
+                        <field name="total_deposit" readonly="1" force_save="1"/>
+                        <field name="total_wd" readonly="1" force_save="1"/>
+                        <field name="bonustype_display" readonly="1" force_save="1" decoration-bf="3"/>
+                        <!-- <field name="uploadfile" /> -->
+                    </group>
+
+                </group>
+                
+                <notebook>
+                    <page string="Lines">
+                        <field name="bo_bonusLine">
+                            <tree editable="top">
+                                <field name="bo_bonusheader_id" invisible="1" />
+                                <field name="date" force_save="1"/>
+                                <field name="pic" />
+                                <field name="kat" />
+                                <field name="keterangan" />
+                                <field name="nama_rekening" />
+                                <field name="member_id" />
+                                <field name="bonustype" />
+                                <field name="nominal" />
+                            </tree>
+                            <form>
+                                <field name="date" force_save="1"/>
+                                <field name="pic" />
+                                <field name="kat" />
+                                <field name="keterangan" />
+                                <field name="nama_rekening" />
+                                <field name="member_id" />
+                                <field name="bonustype" />
+                                <field name="nominal" />
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Record rule bonus -->
+    <record id="bonus_visibility_website_bonus" model="ir.rule">
+        <field name="name">Only see his/her Bonus</field>
+        <field name="model_id" ref="model_bo_bonus_header"/>
+        <field name="domain_force">[('website', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+        <field name = "perm_read" eval = "True" /> 
+        <field name = "perm_write" eval = "True" /> 
+        <field name = "perm_create" eval = "True" /> 
+        <field name = "perm_unlink" eval = "True" /> 
+    </record>
+
+</odoo>

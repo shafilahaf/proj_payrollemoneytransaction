@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bo_approval_request_view_tree" model="ir.ui.view">
+        <field name="name">bo.approval.request.view.tree</field>
+        <field name="model">approval.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <tree create="false" sample="1" decoration-info="request_status == 'new'">
+                <field name="name" />
+                <field name="request_owner_id" widget="many2one_avatar_user"/>
+                <field name="category_id" />
+                <field name="request_status" decoration-info="request_status == 'new'" decoration-warning="request_status == 'pending'" decoration-success="request_status == 'approved'" decoration-danger="request_status == 'refused'" widget="badge"/>
+                <field name="isExecuted2" widget="boolean_toggle" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

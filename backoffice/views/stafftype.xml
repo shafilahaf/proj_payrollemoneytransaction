@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="stafftype_bo_view_tree" model="ir.ui.view">
+        <field name="name">stafftype.bo.view.tree</field>
+        <field name="model">bo.staff.type</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" />
+                <!-- <field name="website" widget="many2many_tags"/> -->
+            </tree>
+        </field>
+    </record>
+</odoo>

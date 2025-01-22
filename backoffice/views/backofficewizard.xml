@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="backoffice_wiazrd_view_form" model="ir.ui.view">
+        <field name="name">backoffice.wiazrd.view.form</field>
+        <field name="model">backoffice.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="uploadfile" />
+                        <field name="backoffice_id" invisible="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="fnimportBackofficeLines" string="Import Excel" type="object" class="oe_highlight"  />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

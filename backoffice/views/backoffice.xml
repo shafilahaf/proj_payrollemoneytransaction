@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- bo.header tree view -->
+    <record id="bo_header_view_tree" model="ir.ui.view">
+        <field name="name">bo.header.view.tree</field>
+        <field name="model">bo.header</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state=='submitted'" decoration-info="state=='done'">
+                <field name="name"/>
+                <field name="bank_account_acc_holder" string="Nama Rekening"/>
+                <field name="website" />
+                <field name="date" />
+                <field name="total_deposit" string="Total Dep"/>
+                <field name="total_withdraw" string="Total WD"/>
+                <field name="total_all_minus_nominal" string="Limit"/>
+                <field name="total_all_balance" string="Balance"/>
+                <!-- <field name="total_depo_minus_wd" sum="Total Depo - Withdraw" string="Balance"/> -->
+                <field name="state" invisible="1"/>
+                <!--Created by in Odoo studio-->
+            </tree>
+        </field>
+    </record>
+
+    <!-- bo.header search -->
+    <record id="bo_header_view_search" model="ir.ui.view">
+        <field name="name">bo.header.view.search</field>
+        <field name="model">bo.header</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- bo.header form view -->
+    <record id="bo_header_view_form" model="ir.ui.view">
+        <field name="name">bo.header.view.form</field>
+        <field name="model">bo.header</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <!-- Add your fields here -->
+                <header>
+                    <button name="action_submitted" string="To Submit" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_cancel" string="Cancelled" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['draft','done'])]}"/>
+                    <!-- <button name="action_draft" string="Reset to Draft" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['cancel', 'done'])]}" groups="backoffice.bo_user_admin_group, backoffice.bo_admin_group"/> -->
+                    <button name="action_draft" string="Reset to Draft" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['cancel', 'done'])]}"/>
+                    <button name="action_done" string="Done" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submitted')]}" groups="backoffice.bo_leader_group, backoffice.bo_admin_group"/>
+                    <button name="action_add_five_boline" string="Add 5 Lines" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}" />
+                    <button name="fnOpenWizard" string="Import Lines" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}" />
+                    <!-- <button name="delete_bulk_bo_line" string="Bulk Delete Line" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}" groups="backoffice.bo_user_admin_group, backoffice.bo_admin_group"/> -->
+                    <button name="delete_bulk_bo_line" string="Bulk Delete Line" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}"/>
+                    <button name="show_backoffice_line" string="Search Line" type="object" class="oe_highlight" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted" />
+                </header>
+
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                <field name="active" invisible="1"/>
+
+                <field name="photo" widget="image" class="oe_right oe_avatar" />
+                <div class="oe_title">
+                    <label for="name" string="Name">Name</label>
+                     <h2><field name="name" force_save="1" readonly="1"/></h2>
+                </div>
+
+                <group col="2">
+
+                    <group>
+                        <field name="date" /> <!-- attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"-->
+                        <field name="website" options="{'no_create': True, 'no_create_edit':True}" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        <field name="initial_balance" force_save="1"/> <!--  attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}" -->
+                        <field name="bank" options="{'no_create': True, 'no_create_edit':True}"  attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        <field name="bank_account" options="{'no_create': True, 'no_create_edit':True}"  attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        
+                        <field name="bank_type" attrs="{'invisible': [('hide_field', '=', False)]}"/>
+                        <field name="bank_account_max_limit" attrs="{'invisible': [('hide_field', '=', False)]}" string="Max Limit"/>
+                        <field name="bank_account_acc_holder" attrs="{'invisible': [('hide_field', '=', False)]}" string="Account Holder"/>
+
+                        <field name="bank_user_id" attrs="{'invisible': [('hide_field', '=', False)]}"/>
+                        <field name="bank_password" attrs="{'invisible': [('hide_field', '=', False)]}"/>
+                        <field name="bank_token" attrs="{'invisible': [('hide_field', '=', False)]}"/>
+                        <!-- <field name="bank_account_acc_holder" attrs="{'invisible': [('hide_field', '=', False)]}"/> -->
+
+
+                        <field name="kategori_header" options="{'no_create': True, 'no_create_edit':True}" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        <field name="shift" options="{'no_create': True, 'no_create_edit':True}" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        <field name="hide_field" invisible="1" />
+                    </group>
+                    <group>
+                        <field name="total_deposit" readonly="1" force_save="1" />
+                        <field name="total_withdraw" readonly="1" force_save="1" />
+                        <field name="total_admin_fee" readonly="1" force_save="1" />
+                        <field name="total_pulsa_fee" readonly="1" force_save="1" />
+                        <field name="total_pulsa_rate" readonly="1" force_save="1" />
+                        <field name="total_purchase_pulsa_credit" readonly="1" force_save="1" />
+                        <field name="total_saving" readonly="1" force_save="1" />
+                        <field name="total_belom_lapor" readonly="1" force_save="1" />
+                        <field name="total_salah_lapor" readonly="1" force_save="1" />
+                        <field name="total_all_minus_nominal" readonly="1" force_save="1" string="Total Uang Keluar (Limit)"/>
+                        <field name="total_all_balance" readonly="1" force_save="1" />
+                        <field name="total_depo_minus_wd" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_deposit_date" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_withdraw_date" readonly="1" force_save="1" invisible="1"/>
+                        <!-- Report Dashboard -->
+                        <field name="total_belom_transfer" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_lp" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_pd" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_save" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_pinj" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_bonus" readonly="1" force_save="1" invisible="1"/>
+                        <field name="total_rebate" readonly="1" force_save="1" invisible="1"/>
+                        <!-- Report Dashboard -->
+                        <field name="selisih" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        <field name="selisih_nominal" attrs="{'invisible': [('selisih', '=', False)], 'readonly': [('state', 'in', ['done', 'cancel'])] }" />
+                        <field name="total_qris_before" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                        <field name="total_qris_pending" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                    </group>
+                    <!-- <group>
+                        
+                    </group> -->
+                </group>
+                
+                <notebook>
+                    <page string="Backoffice Lines">
+                        <field name="bo_line_ids" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}">
+                            <tree editable="bottom" decoration-warning="kategori == 2 and nominal > 100000" limit="30">
+                                <field name="bo_id" invisible="1" />
+                                <!-- <field name="mistaketype" attrs="{'readonly':[('kategori','!=', False)]}"/>
+                                <field name="kategori" attrs="{'readonly':[('mistaketype','!=', False)]}"/> -->
+                                <field name="line_number" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="nominal" attrs="{'readonly':['|',('isExecuted','=', True), ('is_from_request_tampung','=', True)]}"/>
+                                <field name="rekening_name" attrs="{'readonly':['|',('isExecuted','=', True), ('is_from_request_tampung','=', True)]}"/>
+                                <field name="user_id" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="transfer_bank_account" attrs="{'readonly': ['|',('read_only_field','=', False), ('is_from_request_tampung','=', True)], 'required': [('required_field','=', True)]}"/>
+                                <field name="description" attrs="{'readonly':['|',('isExecuted','=', True), ('is_from_request_tampung','=', True)]}"/>
+                                <field name="kategori" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="mistaketype" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="pic" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="create_on" force_save="1" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="last_update" readonly="1" force_save="1" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="last_update_by" readonly="1" force_save="1" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                <field name="transaction_id" attrs="{'readonly':[('is_from_request_tampung','=', True)]}"/>
+                                
+                                <!-- <field name="bank_account" /> -->
+                                <!-- <field name="bank_account_header" invisible="1"/> -->
+                                <field name="read_only_field" invisible="1" />
+                                <field name="required_field" invisible="1" />
+                                <field name="nominal_wd" invisible="1" force_save="1"/>
+                                <field name="is_nominal_wd" force_save="1" invisible="1"/>
+                                <field name="stateline" attrs="{'invisible': [('stateline', '!=', 'approved')]}" />
+                                <field name="isExecuted" force_save="1" invisible="1"/>
+                                <field name="is_from_request_tampung" invisible="1"/>
+                            </tree>
+                            <form>
+                                <field name="mistaketype" options="{'no_create': True, 'no_create_edit':True}"/>
+                                <field name="kategori" options="{'no_create': True, 'no_create_edit':True}"/>
+                                <field name="description" />
+                                <field name="rekening_name" />
+                                <field name="user_id" />
+                                <field name="bank_account" />
+                                <field name="transfer_bank_account" attrs="{'readonly': [('read_only_field','=', False)], 'required': [('required_field','=', False)]}"/>
+                                <field name="nominal" />
+                                <field name="pic" />
+                                <field name="create_on" force_save="1" />
+                                <field name="last_update" readonly="1" force_save="1"/>
+                                <field name="last_update_by" readonly="1" force_save="1"/>
+                                <field name="transaction_id" />
+                                <!-- <field name="bank_account_header" invisible="1"/> -->
+                                <field name="read_only_field" invisible="1" />
+                                <field name="nominal_wd" invisible="1" force_save="1"/>
+                                <field name="is_nominal_wd" force_save="1" invisible="1"/>
+                                <field name="required_field" invisible="1" />
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids"/>
+                </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <!-- bo.line tree bank view-->
+    <record id="bo_line_view_tree" model="ir.ui.view">
+        <field name="name">bo.line.view.tree</field>
+        <field name="model">bo.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" decoration-info="state=='draft'">
+                <!-- Add your fields here -->
+                <field name="bo_header_name" />
+                <field name="create_on" />
+                <field name="last_update_by" />
+                <field name="last_update" />
+                <field name="rekening_name" />
+                <field name="user_id" />
+                <field name="kategori" />
+                <field name="mistaketype" />
+                <field name="bank_account" />
+                <field name="transfer_bank_account" />
+                <field name="nominal" />
+                <field name="stateline" />
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- bo.line search view -->
+    <record id="bo_line_view_search" model="ir.ui.view">
+        <field name="name">bo.line.view.search</field>
+        <field name="model">bo.line</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="rekening_name" />
+                <field name="user_id" />
+                <field name="kategori" />
+                <field name="mistaketype" />
+                <field name="nominal" />
+                <field name="create_on" />
+                <field name="last_update" />
+            </search>
+        </field>
+    </record>
+
+    <!-- bo.line form bl and bt kategori-->
+    <record id="bo_line_blbt_view_form" model="ir.ui.view">
+        <field name="name">bo_line_blbt.view.form</field>
+        <field name="model">bo.line</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="To Approve" name="action_approval" type="object" class="oe_highlight" attrs="{'invisible': [('stateline', '!=', 'draft')]}" /> <!-- groups="backoffice.bo_user_group, backoffice.bo_admin_group"-->
+                    <!-- <button string="Ok, Approve" name="action_approve" type="object" class="oe_highlight" attrs="{'invisible': [('stateline', '!=', 'toapprove')]}" groups="backoffice.bo_leader_group, backoffice.bo_admin_group"/> -->
+                    <button string="Ok, Approve" name="action_approve" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('stateline', '!=', 'toapprove'), ('kategori_name', '=', 'WD')]}"/>
+                    <button string="Ok, Approve WD" name="action_approved_wd" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('stateline', '=', 'approved'), ('kategori_name', '!=', 'WD')]}"/>
+                    <button string="Refused" name="action_refuse" type="object" class="oe_highlight" attrs="{'invisible': [ ('stateline', '!=', 'toapprove')]}" groups="backoffice.bo_leader_group, backoffice.bo_admin_group"/>
+                    <field name="stateline" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="bo_header_name" string="Backoffice Name">Backoffice Name</label>
+                        <h2><field name="bo_header_name" force_save="1"/></h2>
+                    </div>
+                    <group >
+                        <field name="create_on" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="last_update_by" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="last_update" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="kategori" readonly="1"/>
+                        <field name="pic" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="mistaketype" readonly="1"/>
+                        <field name="rekening_name" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="user_id" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="description" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="bank_account" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="nominal" attrs="{'readonly': [('stateline', 'in', ['approved', 'refused'])]}"/>
+                        <field name="kategori_name" invisible="1" force_save="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- bo.line kanban bl and bt kategori-->
+    <record id="bo_line_blbt_view_kanban" model="ir.ui.view">
+        <field name="name">bo_line_blbt.view.kanban</field>
+        <field name="model">bo.line</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong class="o_kanban_record_title"><span><field name="bo_header_name"/></span></strong>
+                                    <strong class="o_kanban_record_subtitle float-end"><span class="text-end"><field name="nominal" widget="monetary"/></span></strong>
+                                </div>
+                            </div>
+                            <div class="row mt-8">
+                                    <div class="col-6 text-muted">
+                                        <span><field name="mistaketype"/></span>
+                                    </div>
+                                    <div class="col-6 text-muted">
+                                        <span><field name="rekening_name"/></span>
+                                    </div>
+                                     <div class="col-6 text-muted">
+                                        <span><field name="user_id"/></span>
+                                    </div>
+                                    <div class="col-12 text-muted">
+                                        <span><field name="bo_header_website"/></span>
+                                    </div>
+                                    <div class="col-12">
+                                        <span class="float-end text-end">
+                                            <field name="stateline" widget="label_selection" options="{'classes': {'draft': 'default', 'toapprove': 'primary', 'approved': 'success'}}"/>
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Record rule Header -->
+    <record id="website_visibility_admin_boheader" model="ir.rule">
+        <field name="name">Only see his/her website backoffice header</field>
+        <field name="model_id" ref="model_bo_header"/>
+        <field name="domain_force">[('website', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+        <field name = "perm_read" eval = "True" /> 
+        <field name = "perm_write" eval = "True" /> 
+        <field name = "perm_create" eval = "True" /> 
+        <field name = "perm_unlink" eval = "True" /> 
+    </record>
+
+    <!-- Record rule Lines -->
+    <record id="website_visibility_admin_boline" model="ir.rule">
+        <field name="name">Only see his/her website BoLine</field>
+        <field name="model_id" ref="model_bo_line"/>
+        <field name="domain_force">[('bo_header_website', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+        <!-- <field name="groups" eval="[(4, ref('backoffice.bo_admin_group'))]"/> -->
+        <field name = "perm_read" eval = "True" /> 
+        <field name = "perm_write" eval = "True" /> 
+        <field name = "perm_create" eval = "True" /> 
+        <field name = "perm_unlink" eval = "True" /> 
+    </record>
+
+    <!-- Ori -->
+    <!-- <record id="ir_cron_create_daily_reports" model="ir.cron">
+            <field name="name">Create Daily Reports test 1 minutes</field>
+            <field name="model_id" ref="model_bo_header"/>
+            <field name="state">code</field>
+            <field name="code">model.create_daily_reports()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+    </record> -->
+    <!-- Ori -->
+
+    <!-- <record id="ir_cron_create_daily_reports" model="ir.cron">
+            <field name="name">Create Daily Reports test 1 minutes</field>
+            <field name="model_id" ref="model_bo_header"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_daily_reports()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+    </record> -->
+
+    <!-- Execute Every at 00:00 (midnight) -->
+    <!-- <record id="ir_cron_create_daily_reports" model="ir.cron">
+        <field name="name">Create Daily Reports</field>
+        <field name="model_id" ref="model_bo_header"/>
+        <field name="state">code</field>
+        <field name="code">model.create_daily_reports()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+        <field name="nextcall" eval="(DateTime.now() + relativedelta(days=+1)).strftime('%Y-%m-%d 00:01:00')"/>
+    </record> -->
+    <!-- Execute Every at 00:00 (midnight) -->
+
+    <!-- Execute Every at 12.00 (noon) -->
+    <!-- <record id="ir_cron_create_daily_reports2" model="ir.cron">
+        <field name="name">Create Daily Reports 2</field>
+        <field name="model_id" ref="model_bo_header"/>
+        <field name="state">code</field>
+        <field name="code">model.create_daily_reports2()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+        <field name="nextcall" eval="(DateTime.now() + relativedelta(days=+1)).strftime('%Y-%m-%d 12:01:00')"/>
+    </record> -->
+    <!-- Execute Every at 12.00 (noon) -->
+
+    <!-- Backoffice Wizard -->
+
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form Filter -->
+    <record id="backofficereportdashboard_filter_form" model="ir.ui.view">
+        <field name="name">backofficereportdashboard.filter.form</field>
+        <field name="model">bo.dashboard.report</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <form string="">
+                <group name="filter" string="Filter">
+                    <field name="website" />
+                    <field name="month" />
+                    <field name="year" />
+                    <!-- <field name="bonus_header_ids" />
+                    <field name="bonus_line_ids" /> -->
+                </group>
+                <group name="total" string="Total">
+                    <field name="total_deposit" readonly="1"/>
+                    <field name="total_withdraw" readonly="1"/>
+                    <field name="total_admin_fee" readonly="1"/>
+                    <field name="total_pulsa_fee" readonly="1"/>
+                    <field name="total_pulsa_rate" readonly="1"/>
+                    <field name="total_purchase_pulsa_credit" readonly="1"/>
+                    <field name="total_saving" readonly="1"/>
+                    <field name="total_belom_lapor" readonly="1"/>
+                    <field name="total_salah_lapor" readonly="1"/>
+                    <field name="total_all_minus_nominal" readonly="1"/>
+                    <field name="total_belom_transfer" readonly="1"/>
+                    <field name="total_lp" readonly="1"/>
+                    <field name="total_pd" readonly="1"/>
+                    <field name="total_save" readonly="1"/>
+                    <field name="total_pinj" readonly="1"/>
+                </group>
+                <group name="daily">
+                    <field name="daily_summary" widget="html" readonly="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_backoffice_report_dashboard" model="ir.actions.act_window">
+        <field name="name">backoffice.report.dashboard</field>
+        <field name="res_model">bo.dashboard.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="backofficereportdashboard_filter_form"/>
+    </record>
+
+    <!-- Form Filter -->
+
+    <!-- Dashboard view -->
+    <record id="backoffice_dashboard_view_dashboard" model="ir.ui.view">
+        <field name="name">Dashboard Backoffice Form</field>
+        <field name="model">board.board</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="dashboardbo">
+                <board style="1">
+                    <column>
+                        <action name="%(act_backoffice_report_dashboard)d" string="Backoffice Analysis" />
+                    </column>
+                </board>
+                <!-- <board style="1-1">
+                    <column>
+                    </column>
+                    <column>
+                    </column>
+                </board> -->
+            </form>
+        </field>
+    </record>
+    <!-- Dashboard view -->
+
+</odoo>

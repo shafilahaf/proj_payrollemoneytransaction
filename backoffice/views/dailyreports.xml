@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="daily_reports_backoffice_view_tree" model="ir.ui.view">
+        <field name="name">daily_reports_backoffice.view.tree</field>
+        <field name="model">bo.daily.reports</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="date" />
+                <field name="website" />
+                <field name="bo_header_bank_account"/>
+                <!-- <field name="selisih" />
+                <field name="total_dp" />
+                <field name="total_wd" /> -->
+                <field name="shift" />
+            </tree>
+        </field>
+    </record>
+
+     <record id="daily_reports_view_search" model="ir.ui.view">
+        <field name="name">daily_reports_backoffice.view.search</field>
+        <field name="model">bo.daily.reports</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="daily_reports_view_form" model="ir.ui.view">
+        <field name="name">daily_reports.view.form</field>
+        <field name="model">bo.daily.reports</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="active" invisible="1"/>
+                    <group>
+                        <field name="name" />
+                        <field name="date" />
+                        <field name="website" />
+                        <field name="shift" />
+                        <field name="bo_header_bank_account" force_save="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Record rule DailyReports -->
+    <record id="dailyreport_visibility_website_dailyreport" model="ir.rule">
+        <field name="name">Only see his/her DailyReports</field>
+        <field name="model_id" ref="model_bo_daily_reports"/>
+        <field name="domain_force">[('website', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+        <field name = "perm_read" eval = "True" /> 
+        <field name = "perm_write" eval = "True" /> 
+        <field name = "perm_create" eval = "True" /> 
+        <field name = "perm_unlink" eval = "True" /> 
+    </record>
+
+    <!-- <record id="daily_reports_backoffice_view_form" model="ir.ui.view">
+        <field name="name">daily_reports_backoffice.view.form</field>
+        <field name="model">bo.daily.reports</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="date" />
+                        <field name="website" />
+                        <field name="shift" />
+                        <field name="bank_tampung" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+
+</odoo>

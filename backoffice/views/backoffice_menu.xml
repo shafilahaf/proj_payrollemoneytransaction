@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!--    Action  -->
+
+    <record id="backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Back Office</field>
+        <field name="res_model">bo.header</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="backoffice_bank_led_entries_action" model="ir.actions.act_window">
+        <field name="name">Bank Ledger Entries</field>
+        <field name="res_model">bo.bank.ledger.entries</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': True}</field> <!-- , 'delete': False -->
+    </record>
+
+    <record id="backoffice_bank_led_entries_wizard_action" model="ir.actions.act_window">
+        <field name="name">Bank Ledger Entries Tools</field>
+        <field name="res_model">bo.bank.ledger.entries.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="backoffice_backoffice_delete_wizard_action" model="ir.actions.act_window">
+        <field name="name">Transaction Delete</field>
+        <field name="res_model">backoffice.delete</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="backoffice_chart_web_menu_action" model="ir.actions.act_window">
+        <field name="name">Website Chart</field>
+        <field name="res_model">bo.header</field>
+        <field name="view_mode">dashboard</field>
+    </record>
+    <record id="backoffice_chart_bank_menu_action" model="ir.actions.act_window">
+        <field name="name">Bank Chart</field>
+        <field name="res_model">bo.header</field>
+        <field name="view_mode">dashboard</field>
+    </record>
+
+    <record id="website_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Website</field>
+        <field name="res_model">bo.website</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="bankgroup_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Bank Group</field>
+        <field name="res_model">bankgroup.bo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- <record id="coa_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Chart of Accounts</field>
+        <field name="res_model">account.account</field>
+        <field name="view_mode">tree</field>
+    </record> -->
+    <record id="bank_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Bank</field>
+        <field name="res_model">res.bank</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="bankaccount_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Bank Account</field>
+        <field name="res_model">res.partner.bank</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="rekap_masa_aktif_action">
+        <field name="name">Rekap Masa Aktif</field>
+        <field name="res_model">res.partner.bank</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="res_partner_bank_rekapmasaaktif_view_tree"/>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+    <record id="backoffice_mistaketype_blbt_action" model="ir.actions.act_window">
+        <field name="name">List of BL and BT</field>
+        <field name="res_model">bo.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">["|",["mistaketype","ilike","BL"],["mistaketype","ilike","BT"]]</field>
+        <field name="context">{'create': False, 'edit': True, 'delete': False}</field>
+    </record>
+    <record id="backoffice_mistaketype_blbt_claimed_action" model="ir.actions.act_window">
+        <field name="name">List of BL and BT Claimed</field>
+        <field name="res_model">bo.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">["|",["mistaketype","ilike","BL"],["mistaketype","ilike","BT"],['stateline', '=', 'approved']]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+    <record id="backoffice_wd_more100_action" model="ir.actions.act_window">
+        <field name="name">List of WD to Approve</field>
+        <field name="res_model">bo.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[['is_nominal_wd', '=', True], ['kategori', 'ilike', 'WD'], ['stateline', '=', 'toapprove']]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+    <record id="backoffice_wd_more100approved_action" model="ir.actions.act_window">
+        <field name="name">List of WD Approved</field>
+        <field name="res_model">bo.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[['is_nominal_wd', '=', True], ['kategori', 'ilike', 'WD'], ['stateline', '=', 'approved']]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="backoffice_lines_action" model="ir.actions.act_window">
+        <field name="name">Lines</field>
+        <field name="res_model">bo.line</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- <record id="action_backoffice_config" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'backoffice', 'bin_size': False}</field>
+    </record> -->
+
+    <record id="backofficetoreview_menu_action" model="ir.actions.act_window">
+        <field name="name">To Review</field>
+        <field name="res_model">bo.header</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','submitted')]</field>
+        <field name="context">{'create': False, 'delete': False}</field>
+    </record>
+
+    <record id="backofficereviewed_menu_action" model="ir.actions.act_window">
+        <field name="name">Reviewed Backoffice</field>
+        <field name="res_model">bo.header</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','done')]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="bo_staff_type_action" model="ir.actions.act_window">
+        <field name="name">Staff Type</field>
+        <field name="res_model">bo.staff.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="bo_bonus" model="ir.actions.act_window">
+        <field name="name">Bonus</field>
+        <field name="res_model">bo.bonus.header</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'delete': False}</field>
+    </record>
+
+    <record id="bo_bonus_type" model="ir.actions.act_window">
+        <field name="name">Bonus Type</field>
+        <field name="res_model">bo.bonus.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="appreqwd_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Request Approval</field>
+        <field name="res_model">approval.category</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'edit': False, 'delete': False}</field>
+    </record>
+    <record id="reqwddana_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Requests</field>
+        <field name="res_model">approval.request</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+    <record id="reqwddanatypeconfig_backoffice_menu_action" model="ir.actions.act_window">
+        <field name="name">Approval Types</field>
+        <field name="res_model">approval.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="backoffice_kategori_menu_action" model="ir.actions.act_window">
+        <field name="name">Kategori</field>
+        <field name="res_model">kategori.bo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="backoffice_mistaketype_menu_action" model="ir.actions.act_window">
+        <field name="name">Mistake Type</field>
+        <field name="res_model">mistaketype.bo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="backoffice_dailyreports_menu_action" model="ir.actions.act_window">
+        <field name="name">Daily Reports</field>
+        <field name="res_model">bo.daily.reports</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+    <record id="backoffice_bl_setup_menu_action" model="ir.actions.act_window">
+        <field name="name">Backoffice Setups</field>
+        <field name="res_model">bo.setups</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="execute_approval_req_action">
+        <field name="name">Execute Request</field>
+        <field name="res_model">approval.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="bo_approval_request_view_tree"/>
+    </record>
+
+    <!-- ReportingDashboard -->
+    <!-- Using board.board model -->
+    <record model="ir.actions.act_window" id="backoffice_board_report_action">
+        <field name="name">Backoffice Report Dashboard</field>
+        <field name="res_model">board.board</field>
+        <field name="view_mode">form</field>
+        <field name="usage">menu</field>
+        <field name="view_id" ref="backoffice_dashboard_view_dashboard"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="backoffice_board_report_vivi_action">
+        <field name="name">Backoffice Vivi Report Dashboard</field>
+        <field name="res_model">board.board</field>
+        <field name="view_mode">form</field>
+        <field name="usage">menu</field>
+        <field name="view_id" ref="backoffice_dashboard_vivi_view_dashboard"/>
+    </record>
+
+    <record id="backoffice_form_tampung_action" model="ir.actions.act_window">
+        <field name="name">Tampung Form</field>
+        <field name="res_model">tampung.header</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    
+    <!-- ReportingDashboard -->
+
+    <!--    Action  -->
+
+    <!--    Menu  -->
+    <menuitem id="backoffice_menu" name="Back Office" web_icon="backoffice,static/description/backoffice_icon.png"/>
+
+    <menuitem id="backoffice_chart_menu_sub" name="Overview" parent="backoffice_menu" sequence="10" action="backoffice_chart_web_menu_action"/>
+    <menuitem id="backoffice_chart_menu_sub_sub_webchart" name="Website Chart" parent="backoffice_chart_menu_sub" action="backoffice_chart_web_menu_action" sequence="10"/>
+    <menuitem id="backoffice_chart_menu_sub_sub_bankchart" name="Bank Chart" parent="backoffice_chart_menu_sub" action="backoffice_chart_bank_menu_action" sequence="20"/>
+
+
+    <menuitem id="backoffice_menu_sub" name="Backoffice" parent="backoffice_menu" action="backoffice_menu_action" sequence="20"/>
+    <menuitem id="backoffice" name="BackOffice" parent="backoffice_menu_sub" action="backoffice_menu_action" sequence="10"/>
+    <menuitem id="backoffice_mt_blbt" name="List of BL and BT" parent="backoffice_menu_sub" action="backoffice_mistaketype_blbt_action" sequence="20"/>
+    <menuitem id="backoffice_mt_blbt_claimed" name="List of BL and BT Claimed" parent="backoffice_menu_sub" action="backoffice_mistaketype_blbt_claimed_action" sequence="30"/>
+    <menuitem id="backoffice_wd_toapprove" name="List of WD to Approve" parent="backoffice_menu_sub" action="backoffice_wd_more100_action" sequence="40"/>
+    <menuitem id="backoffice_wd_approved" name="List of WD Approved" parent="backoffice_menu_sub" action="backoffice_wd_more100approved_action" sequence="50"/>
+    <menuitem id="backoffcie_toreview_status" name="Backoffice To Review" parent="backoffice_menu_sub" action="backofficetoreview_menu_action" sequence="60" /> <!--groups="backoffice.bo_admin_group"-->
+    <menuitem id="backoffcie_reviewed_status" name="Reviewed Backoffice" parent="backoffice_menu_sub" action="backofficereviewed_menu_action" sequence="70" /><!--groups="backoffice.bo_admin_group"-->
+    
+    <menuitem id="websitebo_menu_sub" name="Website" parent="backoffice_menu" action="website_backoffice_menu_action" sequence="30"/>
+
+    <menuitem id="backoffice_accounting_config" parent="backoffice_menu" name="Accounting Configuration" sequence="40"/>
+    <!-- <menuitem id="coabo_menu_sub" name="Chart of Accounts" parent="backoffice_accounting_config" action="coa_backoffice_menu_action" sequence="10"/> -->
+    <menuitem id="bankbo_menu_sub" name="Bank" parent="backoffice_accounting_config" action="bank_backoffice_menu_action" sequence="20"/>
+    <menuitem id="bankaccountbo_menu_sub" name="Bank Account" parent="backoffice_accounting_config" action="bankaccount_backoffice_menu_action" sequence="30"/>
+    <menuitem id="bankaccountrekapmasaaktifbo_menu_sub" name="Rekap Masa Aktif" parent="backoffice_accounting_config" action="rekap_masa_aktif_action" sequence="40"/>
+    <menuitem id="bobankledentries_menu_sub" name="Bank Ledger Entries" parent="backoffice_accounting_config" action="backoffice_bank_led_entries_action" sequence="50"/>
+    <menuitem id="bobankledentrieswizard_menu_sub" name="Bank Ledger Entries Tools" parent="backoffice_accounting_config" action="backoffice_bank_led_entries_wizard_action" sequence="60"/>
+
+    <menuitem id="backoffice_bonus" parent="backoffice_menu" name="Bonus" sequence="50"/>
+    <menuitem id="backoffice_bonus_type" parent="backoffice_bonus" name="Bonus Type" action="bo_bonus_type" sequence="20"/>
+    <menuitem id="backoffice_bonuses" parent="backoffice_bonus" name="Bonus" action="bo_bonus" sequence="10"/>
+
+    <menuitem id="backoffice_settings" parent="backoffice_menu" name="General Configuration" sequence="70"/>
+    <!-- <menuitem id="menu_backoffice_config" parent="backoffice_settings" name="Settings" action="action_backoffice_config" groups="base.group_system" sequence="10"/> -->
+    <menuitem id="menu_backoffice_config_stafftype" parent="backoffice_settings" name="Staff Type" action="bo_staff_type_action" sequence="20"/>
+    <menuitem id="menu_backoffice_config_reqwddanatypeconfig" parent="backoffice_settings" name="Approval Types" action="reqwddanatypeconfig_backoffice_menu_action" sequence="30"/>
+    <menuitem id="menu_backoffice_config_bokategori" parent="backoffice_settings" name="Kategori" action="backoffice_kategori_menu_action" sequence="40"/>
+    <menuitem id="menu_backoffice_config_bomistaketype" parent="backoffice_settings" name="Mistake Type" action="backoffice_mistaketype_menu_action" sequence="50"/>
+    <menuitem id="menu_backoffice_config_blmistaketype_claimed" parent="backoffice_settings" name="Backoffice Setup" action="backoffice_bl_setup_menu_action" sequence="60"/>
+    <menuitem id="menu_backoffice_delete_setup" parent="backoffice_settings" name="Transaction Delete" action="backoffice_backoffice_delete_wizard_action" sequence="70"/>
+
+    <menuitem id="bt_menu" parent="backoffice_menu" name="Bank Tampung" sequence="50"/>
+    <menuitem id="appreq_menu" name="Request Approval" parent="bt_menu" sequence="30" action="appreqwd_backoffice_menu_action"/>
+    <menuitem id="req_menu" name="Requests" parent="bt_menu" sequence="40" action="reqwddana_backoffice_menu_action"/>
+    <menuitem id="execute_req_menu" name="Execute Request" parent="bt_menu" sequence="50" action="execute_approval_req_action"/>
+    <menuitem id="backoffice_tampung_form" parent="bt_menu" name="Tampung Form" action="backoffice_form_tampung_action" sequence="60"/>
+
+    <menuitem id="reporting_menu" parent="backoffice_menu" name="Reporting" sequence="60"/>
+    <menuitem id="menu_backoffice_config_dailyreports" parent="reporting_menu" name="Daily Reports" action="backoffice_dailyreports_menu_action" sequence="10"/>
+    <menuitem id="backoffcie_board_report_dashboard" parent="reporting_menu" name="Backoffice Reporting" action="backoffice_board_report_action" sequence="70"/>
+    <menuitem id="backoffcie_board_report_dashboard_vivi" parent="reporting_menu" name="Backoffice vivi Reporting" action="backoffice_board_report_vivi_action" sequence="80"/>
+    
+    <!-- <menuitem id="backoffice_tampung_menu" parent="backoffice_menu" name="Tampung" sequence="70"/>
+    <menuitem id="backoffice_tampung_form" parent="backoffice_tampung_menu" name="Tampung Form" action="backoffice_form_tampung_action" sequence="10"/> -->
+    <!--    Menu  -->
+</odoo>

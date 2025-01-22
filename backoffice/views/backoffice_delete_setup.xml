@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bo_backofficedeletesetup_view_form" model="ir.ui.view">
+        <field name="name">bo.delete.setup.wizard.view.form</field>
+        <field name="model">backoffice.delete</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="description" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="delete_backoffice" string="Delete All" type="object" class="oe_highlight"  />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

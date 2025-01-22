@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="bankgroup_bo_view_tree" model="ir.ui.view">
+        <field name="name">bankgroup.bo.view.tree</field>
+        <field name="model">bankgroup.bo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bankgroup" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="bankgroup_bo_view_form" model="ir.ui.view">
+        <field name="name">bankgroup.bo.view.form</field>
+        <field name="model">bankgroup.bo</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="bankgroup" />
+                    </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+
+            </form>
+        </field>
+    </record>
+</odoo>

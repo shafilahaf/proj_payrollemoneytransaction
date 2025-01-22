@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bank_ledger_entries_view_tree" model="ir.ui.view">
+        <field name="name">bank.ledger.entries.view.tree</field>
+        <field name="model">bo.bank.ledger.entries</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="entry_no" />
+                <field name="posting_date" />
+                <field name="document_type" />
+                <field name="is_from_request_tampung" />
+                <field name="request_category_name" />
+                <field name="document_id_header" />
+                <field name="kategori" />
+                <field name="mistaketype" />
+                <field name="document_id_line" />
+                <field name="bank_account_no" string="Bank"/>
+                <field name="bank_account_id" />
+                <field name="bank_account_name" />
+                <field name="amount" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

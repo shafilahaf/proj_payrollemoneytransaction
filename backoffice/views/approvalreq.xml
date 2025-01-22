@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- NEW -->
+    <record id="approval_request_view_form_inherit_danawd" model="ir.ui.view">
+        <field name="name">approval.request.inherit.reqdanawd.view.form</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_confirmed']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
+            <!--Hide notebook page-->
+            <xpath expr="//page[@name='approvers']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Request Status with widget status bar statusbar_visible only new, pending, approved, refused -->
+            <xpath expr="//field[@name='request_status']" position="attributes">
+                <attribute name="statusbar_visible">new,pending,approved,refused</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- Change oe_title -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="name2" readonly="1" force_save="1" />
+            </xpath>
+
+            <xpath expr="//field[@name='request_owner_id']" position="attributes">
+                <attribute name="string">Operator/CS</attribute>
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount']" position="before">
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                <field name="active" invisible="1"/>
+                <field name="has_website" invisible="1"/>
+                <field name="has_bank_account_holder" invisible="1"/>
+                <field name="has_from_bank_account" invisible="1"/>
+                <field name="has_member_id" invisible="1"/>
+                <field name="has_bank" invisible="1"/>
+                <field name="has_nama_rekening" invisible="1"/>
+                <field name="has_nomor_rekening" invisible="1"/>
+                <field name="category_approval_name" invisible="1"/>
+                <field name="banks_category" invisible="1" />
+
+                <!-- When request_status -->
+
+                <label for="website" string="Website" attrs="{'invisible':[('has_website','==','no')]}"/>
+                <div attrs="{'invisible':[('has_website','==','no')]}">
+                    <div>
+                        <field name="website" class="oe_inline" attrs="{'required': [('has_website','==','required')], 'readonly': [('request_status','not in',('new'))]}"/>
+                    </div>
+                </div>
+
+                <!-- <label for="bank_account_holder" string="Bank Account Holder" attrs="{'invisible':['|', ('has_bank_account_holder','==','no')]}"/>
+                <div attrs="{'invisible':[('has_bank_account_holder','==','no')]}">
+                    <div>
+                        <field name="bank_account_holder" class="oe_inline" attrs="{'required': [('has_bank_account_holder','==','required')], 'readonly': [('request_status','not in',('new'))]}"/>
+                    </div>
+                </div>
+
+                <label for="from_bank_account" string="From Bank Account" attrs="{'invisible':[('has_from_bank_account','==','no')]}"/>
+                <div attrs="{'invisible':[('has_from_bank_account','==','no')]}">
+                    <div>
+                        <field name="from_bank_account" class="oe_inline" attrs="{'required': [('has_from_bank_account','==','required')], 'readonly': [('request_status','not in',('new', 'pending'))]}"/>
+                    </div>
+                </div> -->
+
+                <label for="bank_account_holder" string="To Bank Account" attrs="{'invisible': [('request_status', '!=', 'approved'), ('has_bank_account_holder', '=', 'no')]}"/> <!--, ('category_approval_name', 'ilike', 'WD')-->
+                <div attrs="{'invisible': [('request_status', '!=', 'approved'), ('has_bank_account_holder', '=', 'no')]}"> <!--, ('category_approval_name', 'ilike', 'WD')-->
+                    <div>
+                        <field name="bank_account_holder" class="oe_inline" attrs="{'required': ['|',('has_bank_account_holder','=','required'), ('request_status', '=', 'approved'), ('category_approval_name', '!=', 'REQUEST WD')], 'readonly': ['|','|',('request_status', 'not in', ('new', 'approved')), ('category_approval_name', '=', 'REQUEST WD'), ('isExecuted2', '=', True)]}"/> <!--, 'invisible':[('category_approval_name', 'ilike', 'WD')]--> <!--Required : ('category_approval_name', '!=', 'REQUEST WD'), -->
+                    </div>
+                </div>
+
+                <label for="from_bank_account" string="From Bank Account" attrs="{'invisible': [('request_status', '!=', 'approved'), ('has_from_bank_account', '=', 'no')]}"/>
+                <div attrs="{'invisible': [('request_status', '!=', 'approved'), ('has_from_bank_account', '=', 'no')]}">
+                    <div>
+                        <field name="from_bank_account" class="oe_inline" attrs="{'required': ['|',('request_status', '=', 'approved'), ('has_from_bank_account','==','required')], 'readonly': ['|', ('request_status', 'not in', ('new', 'approved')), ('isExecuted2', '=', True)]}"/>
+                    </div>
+                </div>
+
+                <label for="member_id" string="Member ID" attrs="{'invisible':[('has_member_id','==','no')]}"/>
+                <div attrs="{'invisible':[('has_member_id','==','no')]}">
+                    <div>
+                        <field name="member_id" class="oe_inline" attrs="{'required': [('has_member_id','==','required')], 'readonly': [('request_status','not in',('new'))]}"/>
+                    </div>
+                </div>
+
+                <label for="name_bank" string="Bank" attrs="{'invisible':[('has_bank','==','no')]}"/>
+                <div attrs="{'invisible':[('has_bank','==','no')]}">
+                    <div>
+                        <field name="name_bank" class="oe_inline" attrs="{'required': [('has_bank','==','required')], 'readonly': [('request_status','not in',('new'))]}"/>
+                    </div>
+                </div>
+
+                <label for="nama_rekening" string="Nama Rekening" attrs="{'invisible':[('has_nama_rekening','==','no')]}"/>
+                <div attrs="{'invisible':[('has_nama_rekening','==','no')]}">
+                    <div>
+                        <field name="nama_rekening" class="oe_inline" attrs="{'required': [('has_nama_rekening','==','required')], 'readonly': [('request_status','not in',('new'))]}"/>
+                    </div>
+                </div>
+
+                <label for="nomor_rekening" string="Nomor Rekening" attrs="{'invisible':[('has_nomor_rekening','==','no')]}"/>
+                <div attrs="{'invisible':[('has_nomor_rekening','==','no')]}">
+                    <div>
+                        <field name="nomor_rekening" class="oe_inline" attrs="{'required': [('has_nomor_rekening','==','required')], 'readonly': [('request_status','not in',('new'))]}"/>
+                    </div>
+                </div>
+
+            </xpath>
+
+            <xpath expr="//field[@name='amount']" position="after">
+                <field name="isExecuted2" widget="boolean_toggle" attrs="{'readonly': [('request_status', 'in', ['new', 'pending', 'approved', 'refused'])]}"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="action_insert_bo_line" string="Execute" type="object" class="btn-primary" attrs="{'invisible': ['|',('isExecuted2', '=', True), ('request_status', '!=', 'approved')]}"/> <!-- groups="backoffice.bo_user_admin_group, backoffice.bo_admin_group"-->
+                <button name="send_group_approval" string="Submit Approval" type="object" class="btn-primary" attrs="{'invisible':[('request_status','!=','new')]}" data-hotkey="v" />
+            </xpath>
+
+            <!-- button refused can show in approved status -->
+            <xpath expr="//button[@name='action_refuse']" position="attributes">
+                <attribute name="attrs">{'invisible':['|',('request_status','in',('new','refused')), ('isExecuted2', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
+            <xpath expr="//button[@name='action_withdraw']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="approval_request_inhert_view_search" model="ir.ui.view">
+        <field name="name">approval.request.inhert.view.search</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_search_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_my_request']" position="after">
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- NEW -->
+
+</odoo>

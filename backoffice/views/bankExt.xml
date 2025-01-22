@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="res_bank_form_inherit_bank" model="ir.ui.view">
+        <field name="name">res.bank.form.inherit</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='bank_details']" position="inside">
+                <field name="websites" force_save="1"/>
+                <field name="isBankTampung" force_save="1" widget="boolean_toggle" />
+            </xpath>
+            <xpath expr="//field[@name='bic']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street2']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='street']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Hide Street from OdooStudio -->
+        </field>
+    </record>
+
+    <!-- Record rule Bank -->
+    <record id="bank_visibility_website_resbank" model="ir.rule">
+        <field name="name">Only see his/her website Bank</field>
+        <field name="model_id" ref="model_res_bank"/>
+        <field name="domain_force">[('websites', 'in', user.website.ids)] if user.website else [(1, '=', 1)]</field>
+        <field name = "perm_read" eval = "True" /> 
+        <field name = "perm_write" eval = "True" /> 
+        <field name = "perm_create" eval = "True" /> 
+        <field name = "perm_unlink" eval = "True" /> 
+    </record>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bank_ledger_tools_view_form" model="ir.ui.view">
+        <field name="name">bank.ledger.tools.view.form</field>
+        <field name="model">bo.bank.ledger.entries.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="note" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="insert_bank_ledger_entries" string="Sync" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
