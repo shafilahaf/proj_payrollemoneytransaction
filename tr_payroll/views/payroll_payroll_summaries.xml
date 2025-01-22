@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="payroll_payroll_summaries_view_tree" model="ir.ui.view">
+        <field name="name">payroll.payroll.summaries.view.tree</field>
+        <field name="model">payroll.payroll.summaries</field>
+        <field name="arch" type="xml">
+            <tree string="Payroll Summaries" js_class="button_in_tree">
+                <field name="employee_id"/>
+                <field name="employee_id_department" />
+                <field name="employee_id_category" />
+                <field name="employee_company_id"/>
+                <field name="employee_position_id"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="total_work_days"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <button name="button_details" string="Payroll Slip" class="btn-white btn-outline-warning" type="object"/>
+                <button name="action_preview_pdf" string="Preview Payroll" class="btn-white btn-outline-info" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_payroll_summaries_view_search" model="ir.ui.view">
+        <field name="name">payroll.payroll.summaries.view.search</field>
+        <field name="model">payroll.payroll.summaries</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="employee_id"/>
+                <field name="month"/>
+                <field name="year"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="payroll_payroll_summaries_ph_view_tree" model="ir.ui.view">
+        <field name="name">payroll.payroll.summaries.ph.view.tree</field>
+        <field name="model">payroll.payroll.summaries</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <tree string="Payroll Summaries" js_class="button_in_tree_summaries_ph">
+                <field name="employee_id"/>
+                <field name="employee_company_id"/>
+                <field name="employee_position_id"/>
+                <field name="periode" />
+                <field name="month"/>
+                <field name="year"/>
+                <field name="total_work_days"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <button name="button_details" string="Payroll Slip" class="btn-white btn-outline-warning" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_payroll_summaries_ext_view_tree" model="ir.ui.view">
+        <field name="name">payroll.payroll.summaries.ext.view.tree</field>
+        <field name="model">payroll.payroll.summaries</field>
+        <field name="priority" eval="21" />
+        <field name="arch" type="xml">
+            <tree string="Payroll Summaries">
+                <field name="employee_id"/>
+                <field name="employee_company_id"/>
+                <field name="employee_position_id"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="total_work_days"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <button name="button_details" string="Payroll Slip" class="btn-white btn-outline-warning" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>

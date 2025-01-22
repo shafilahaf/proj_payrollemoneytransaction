@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_timeoff_request_view_tree" model="ir.ui.view">
+        <field name="name">payroll.time.off.request.view.tree</field>
+        <field name="model">payroll.time.off.request</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="created_by" string="Created By"/>
+                <field name="employee_id" string="Employee"/>
+                <field name="request_date" />
+                <field name="request_type" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- search view -->
+    <record id="payroll_timeoff_request_view_search" model="ir.ui.view">
+        <field name="name">payroll.time.off.request.view.search</field>
+        <field name="model">payroll.time.off.request</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" string="Document Name"/>
+                <field name="employee_id" string="Employee"/>
+                <field name="created_by" string="Created By"/>
+                <field name="request_date" />
+                <field name="request_type" />
+                <field name="status" />
+            </search>
+        </field>
+    </record>
+
+    <record id="payroll_timeoff_request_view_form" model="ir.ui.view">
+        <field name="name">payroll.time.off.request.view.form</field>
+        <field name="model">payroll.time.off.request</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_submit_for_approval" string="Submit Approval" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', '1')]}"/>
+                    <!-- <button name="action_approve" string="Approve" type="object" class="oe_highlight" /> -->
+                    <!-- <button name="action_reject" string="Refuse" type="object" class="oe_highlight" /> -->
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Document Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="o_text_overflow" name="name" readonly="1"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="created_by" string="Created By"/>
+                        <field name="employee_id" string="Employee"/>
+                        <field name="request_date" />
+                        <field name="request_type" />
+                        <field name="start_date" />
+                        <field name="end_date" />
+                        <field name="duration" force_save="1"/>
+                        <field name="remaining_off_day"  force_save="1"/>
+                        <field name="remaining_leave"  force_save="1" attrs="{'invisible': [('request_type', '=', '4')]}"/>
+                        <field name="remaining_amount"  force_save="1"/>
+                        <field name="reimburse_amount" />
+                        <field name="ticket_amount" />
+                        <field name="file"/>
+                        <field name="remarks" />
+                        <field name="currency_id" />
+                        <field name="employee_id" force_save="1" invisible="1"/>
+                        <field name="internal_note" />
+                    </group>
+                    <!--TODO: matiin dulu mau liat-->
+                    <!-- <notebook >
+                        <page name="time_off_req_approver" string="Approver">
+                            <field name="time_off_request_approval_ids" >
+                                <tree editable="bottom" > 
+                                    <field name="approver"  />
+                                    <field name="approver_current_position" />
+                                    <field name="sequence"  />
+                                    <field name="approver_date" />
+                                    <field name="has_approved" />
+                                    <field name="reason" />
+                                </tree>
+                                <form string="Approver" >
+                                    <group>
+                                        <field name="approver" />
+                                        <field name="approver_current_position"  />
+                                        <field name="sequence" />
+                                        <field name="approver_date"  />
+                                        <field name="has_approved" />
+                                        <field name="reason" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook> -->
+                </sheet>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+
+    <record id="view_payroll_time_off_request_kanban" model="ir.ui.view">
+        <field name="name">payroll.time.off.request.kanban</field>
+        <field name="model">payroll.time.off.request</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="name"/>
+                <field name="request_type"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="duration"/>
+                <field name="status"/>
+                <field name="created_by" string="Created By"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click o_kanban_card_{{record.status.raw_value}}">
+                            <div class= "oe_kanban_details">
+                                <strong class="oe_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <span>Status:</span> <field name="status"/>
+                                </div>
+                                <div>
+                                    <span>Request Type:</span> <field name="request_type"/>
+                                </div>
+                                <div>
+                                    <span>Start Date:</span> <field name="start_date"/>
+                                </div>
+                                <div>
+                                    <span>End Date:</span> <field name="end_date"/>
+                                </div>
+                                <div>
+                                    <span>Duration:</span> <field name="duration"/> days
+                                </div>
+                                <div>
+                                    <span>Employee:</span> <field name="created_by"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- wizard -->
+    <record id="view_payroll_time_off_reject_wizard_form" model="ir.ui.view">
+        <field name="name">payroll.time.off.reject.wizard.form</field>
+        <field name="model">payroll.time.off.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reject Time Off Request">
+                <group>
+                    <field name="reason"/>
+                </group>
+                <footer>
+                    <button string="Reject" type="object" name="action_reject" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sequence -->
+    <record id="payroll_timeoff_request_sequence" model="ir.sequence">
+        <field name="name">payroll.time.off.request.sequence</field>
+        <field name="code">payroll.time.off.request</field>
+        <field name="prefix">TOR-</field>
+        <field name="padding">5</field>
+    </record>
+
+    <!-- <record id="timeoffreq_employee_visibility_by_position_level" model="ir.rule">
+        <field name="name">TOR Employee Visibility by Position Level</field>
+        <field name="model_id" ref="model_payroll_time_off_request"/>
+        <field name="domain_force">['|', ('employee_id.current_position.level', '>', user.payroll_positions_level), ('employee_id', '=', user.payroll_employee_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record> -->
+
+</odoo>

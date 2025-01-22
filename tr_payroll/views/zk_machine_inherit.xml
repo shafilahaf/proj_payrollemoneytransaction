@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+        <record id="view_zk_machine_form_inherit" model="ir.ui.view">
+            <field name="name">zk.machine.form.inherit</field>
+            <field name="model">zk.machine</field>
+            <field name="inherit_id" ref="hr_zk_attendance.view_zk_machine_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='download_attendance']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='clear_attendance']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="address_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <header position="inside">
+                    <button name="test_connection" type="object" string="Test Connection" class="oe_highlight"
+                            icon="fa-wifi" />
+                    <button name="convert_att_log" type="object" string="Convert Attendance Log" class="oe_highlight"
+                            icon="fa-download" />
+                </header>
+                <group position="inside">
+                    <!-- <field name="device_department_id"/> -->
+                    <group>
+                        <field name="device_department_id"/>
+                        <field name="last_date_run" />
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record id="view_zk_machine_tree_inherit" model="ir.ui.view">
+            <field name="name">zk.machine.tree.inherit</field>
+            <field name="model">zk.machine</field>
+            <field name="inherit_id" ref="hr_zk_attendance.view_zk_machine_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="string">Biometric Machine</attribute>
+                    <attribute name="js_class">button_in_tree_attendance_device</attribute>
+                </xpath>
+                <field name="address_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="name" position="before">
+                    <field name="device_department_id" />
+                </field>
+                <field name="port_no" position="after">
+                    <field name="last_date_run" />
+                </field>
+            </field>
+        </record>
+
+        <record forcecreate="True" id="ir_cron_download_attendance" model="ir.cron">
+            <field name="name">Download Attendance Data Every 1 Hours</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="tr_payroll.model_zk_machine"/>
+            <field name="state">code</field>
+            <field name="code">model.run_scheduled_attendance_download()</field>
+        </record>
+
+        <record forcecreate="True" id="ir_cron_create_att_log" model="ir.cron">
+            <field name="name">Create Attendance Log Every 1 Hours</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="tr_payroll.model_zk_machine"/>
+            <field name="state">code</field>
+            <field name="code">model.scheduled_convert_att_log()</field>
+        </record>
+
+    </data>
+</odoo>

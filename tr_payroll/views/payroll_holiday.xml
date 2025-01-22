@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_payroll_holiday_view_tree" model="ir.ui.view">
+        <field name="name">payroll.holiday.view.tree</field>
+        <field name="model">payroll.holiday</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="event" />
+                <field name="type" />
+                <field name="day" />
+                <field name="month" />
+                <!-- <field name="year" /> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_payroll_holiday_view_form" model="ir.ui.view">
+        <field name="name">payroll.holiday.view.form</field>
+        <field name="model">payroll.holiday</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="event" />
+                        <field name="type" />
+                        <field name="day" />
+                        <field name="month" />
+                        <!-- <field name="year" /> -->
+                        <!-- <field name="date" readonly="1"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_payroll_config_all_form" model="ir.ui.view">
+        <field name="name">payroll.config.all.form</field>
+        <field name="model">payroll.config.all</field>
+        <field name="arch" type="xml">
+            <form string="Payroll Config">
+                <sheet>
+                    <group>
+                        <field name="description"/>
+                        <field name="excel_file"/>
+                    </group>
+                    <footer>
+                        <button name="delete_all_attendance_logs" type="object" string="Delete All Attendance Logs" class="btn-danger"/>
+                        <button name="import_attendance_log_from_excel" string="Import Attendance Log" type="object" class="btn-primary"/>
+                        <button name="fill_employee_id_tor" string="Fill Employee ID TOR" type="object" class="btn-primary"/>
+                        <button name="fill_employee_id_resusers" string="Fill Employee ID ResUsers" type="object" class="btn-primary"/>
+                        <button name="fill_username_in_employee" string="Fill Employee Username" type="object" class="btn-primary"/>
+                        <button name="fix_source_id_attlog" string="Fix Source ID AttLog" type="object" class="btn-primary"/>
+                        <button name="fix_status_approval_entries" string="Fix Approval Entries" type="object" class="oe_highlight"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

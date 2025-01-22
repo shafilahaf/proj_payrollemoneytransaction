@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_salary_components_view_tree" model="ir.ui.view">
+        <field name="name">payroll.salary.components.view.tree</field>
+        <field name="model">payroll.salary.components</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="is_basic_salary" />
+                <field name="ph_salary_type" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_salary_component_view_form" model="ir.ui.view">
+        <field name="name">payroll.salary.components.view.form</field>
+        <field name="model">payroll.salary.components</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="active" invisible="1"/>
+                        <field name="name"/>
+                        <field name="is_basic_salary"/>
+                        <field name="ph_salary_type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_salary_component_view_search" model="ir.ui.view">
+        <field name="name">payroll.salary.components.view.search</field>
+        <field name="model">payroll.salary.components</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>

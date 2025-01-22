@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_kpi_template_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <h2 class="centered-text">Key Performance Index</h2>
+                    <h4 class="centered-text"> 
+                        <t t-if="doc.semester == '1'">
+                            Semester 1 - <span t-esc="doc.year"/> 
+                        </t>
+                        <t t-else="">
+                            Semester 2 - <span t-esc="doc.year"/> 
+                        </t> 
+                    </h4>
+                    <table class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <table class="employee-info">
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.name"/>
+                                        </tr>
+                                        <tr>
+                                            <td>NIK</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.nik"/>
+                                        </tr>
+                                        <tr>
+                                            <td>Company</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.company_id.name"/>
+                                        </tr>
+                                        <tr>
+                                            <td>Department</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.department_id.name"/>
+                                        </tr>
+                                        <tr>
+                                            <td>Position</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.current_position.name"/>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="employee-info">
+                                        <tr>
+                                            <td>Total Att. Log Point</td>
+                                            <td>:</td>
+                                            <!-- <td t-esc="doc.total_att_log_point"/> -->
+                                            <td t-esc="'{:0.2f}'.format(doc.total_att_log_point)" />
+                                        </tr>
+                                        <tr>
+                                            <td>Total Performance Point</td>
+                                            <td>:</td>
+                                            <!-- <td t-esc="doc.total_performance_point"/> -->
+                                            <td t-esc="'{:0.2f}'.format(doc.total_performance_point)" />
+                                        </tr>
+                                        <tr>
+                                            <td>Total KPI Point</td>
+                                            <td>:</td>
+                                            <!-- <td t-esc="doc.kpi_point"/> -->
+                                            <td t-esc="'{:0.2f}'.format(doc.kpi_point)" />
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Total Point</th>
+                                <th>Percentage %</th>
+                                <th>KPI Point</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.kpi_details_ids" t-as="summary">
+                                <td>
+                                    <t t-esc="summary.type_text"/>
+                                </td>
+                                <td>
+                                    <t t-esc="summary.start_date" t-options='{"widget": "date","format": "dd MMMM yyyy"}'/>
+                                </td> 
+                                <td>
+                                    <t t-esc="summary.end_date" t-options='{"widget": "date","format": "dd MMMM yyyy"}'/>
+                                </td> 
+                                <td>
+                                    <!-- <t t-esc="summary.total_point"/> -->
+                                    <t t-esc="'{:0.2f}'.format(summary.total_point)" />
+                                </td> 
+                                <td>
+                                    <!-- <t t-esc="summary.percentage"/> -->
+                                    <t t-esc="'{:0.2f}'.format(summary.percentage)" />
+                                </td> 
+                                <td>
+                                    <!-- <t t-esc="summary.kpi_point"/> -->
+                                    <t t-esc="'{:0.2f}'.format(summary.kpi_point)" />
+                                </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                    <style>
+                        .centered-text {
+                            text-align: center;
+                        }
+                        .align-colon {
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                        .column {
+                            float: left;
+                            width: 47%;
+                            padding: 10px;
+                            height: 300px;
+                            page-break-inside: avoid;
+                        }
+                        .row:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        table, th, td {
+                            border: 1px solid black;
+                        }
+                        th, td {
+                            padding: 15px;
+                            text-align: left;
+                        }
+                        th {
+                            background-color: #a77ed9;
+                        }
+                        .table-bordered {
+                            border: 1px solid black;
+                        }
+                        .table-bordered th, .table-bordered td {
+                            border: 1px solid black;
+                        }
+                        .table-bordered th {
+                            background-color: #a77ed9;
+                        }
+                        .container {
+                            border: 1px solid black;
+                            padding: 10px;
+                            page-break-inside: avoid;
+                        }
+                        body {
+                            font-family: 'Montserrat', sans-serif;
+                        }
+
+                        .employee-info {
+                            border: none;
+                        }
+                        .employee-info td {
+                            border: none;
+                            padding: 5px;
+                        }
+
+                    </style>
+                </div>
+                <div class="footer">
+                    <div class="footer-left" style="float: left;font-family: 'Montserrat', sans-serif;">
+                        Printed on <span t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/>
+                    </div>
+                    <div class="footer-right" style="float: right;font-family: 'Montserrat', sans-serif;">
+                        Page <span class="page"/> of <span class="topage"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

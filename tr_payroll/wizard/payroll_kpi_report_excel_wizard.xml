@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_kpi_excel_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">payroll.kpi.excel.report.wizard.view.form</field>
+        <field name="model">payroll.kpi.report.excel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="year" />
+                        <field name="semester" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Calculate" name="calculate_kpi" type="object" class="btn-primary" />
+                    <button string="Export Excel" name="payroll_kpi_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

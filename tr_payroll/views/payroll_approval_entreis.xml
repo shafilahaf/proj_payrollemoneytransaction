@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_approval_entries_view_search" model="ir.ui.view">
+        <field name="name">payroll.approval.entries.view.search</field>
+        <field name="model">payroll.approval.entries</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" />
+                <field name="document_id" />
+                <field name="request_type" />
+                <field name="status" />
+            </search>
+        </field>
+    </record>
+
+    <record id="view_payroll_approval_entries_form" model="ir.ui.view">
+            <field name="name">payroll.approval.entries.form</field>
+            <field name="model">payroll.approval.entries</field>
+            <field name="arch" type="xml">
+                <form string="Approval Entry">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="document_type"/>
+                            <field name="document_id"/>
+                            <field name="request_date"/>
+                            <field name="request_type"></field>
+                            <field name="file" />
+                            <field name="request_by"/>
+                            <field name="request_by_employee"/>
+                            <field name="status"/>
+                            <field name="approver" />
+                            <field name="sequence"/>
+                            <field name="reason"/>
+                            <field name="approved_date" readonly="1"/>
+                            <field name="approved_by" readonly="1"/>
+                            <field name="internal_note" />
+                        </group>
+                        <footer>
+                            <button name="action_approve_entry" type="object" string="Approve" class="btn-primary" attrs="{'invisible': [('status', '!=', '2')]}"/>
+                            <button name="action_reject_entry" type="object" string="Reject" class="btn-secondary" attrs="{'invisible': [('status', '!=', '2')]}"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View for Payroll Approval Entries -->
+        <record id="view_payroll_approval_entries_tree" model="ir.ui.view">
+            <field name="name">payroll.approval.entries.tree</field>
+            <field name="model">payroll.approval.entries</field>
+            <field name="arch" type="xml">
+                <tree string="Approval Entries">
+                    <field name="name"/>
+                    <field name="document_type"/>
+                    <field name="document_id"/>
+                    <field name="request_date"/>
+                    <field name="request_type"></field>
+                    <field name="request_by"/>
+                    <field name="status"/>
+                    <field name="approver" />
+                    <field name="sequence"/>
+                    <field name="approved_date"/>
+                    <field name="approved_by"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Sequence -->
+        <record id="payroll_approval_entries_sequence" model="ir.sequence">
+            <field name="name">payroll.approval.entries.sequence</field>
+            <field name="code">payroll.approval.entries</field>
+            <field name="prefix">AE-</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- <record id="approvalentries_employee_visibility_by_position_level" model="ir.rule">
+            <field name="name">ApprovalEntries Employee Visibility by Position Level</field>
+            <field name="model_id" ref="model_payroll_approval_entries"/>
+            <field name="domain_force">['|', ('approver.current_position.level', '>', user.payroll_positions_level), ('approver', '=', user.payroll_employee_id.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record> -->
+
+</odoo>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_attendance_log_view_tree" model="ir.ui.view">
+        <field name="name">payroll.attendance.log.view.tree</field>
+        <field name="model">payroll.attendance.log</field>
+        <field name="arch" type="xml">
+            <tree string="Attendance Log" js_class="button_in_tree_attendance_log">
+                <field name="nik" />
+                <field name="employee_id" />
+                <field name="department_id" />
+                <field name="start_time" />
+                <field name="end_time" />
+                <field name="working_hours" />
+                <field name="status" />
+                <field name="is_latelog" />
+                <field name="is_late_2" />
+                <field name="is_late_3" />
+                <field name="is_late_4" />
+                <field name="late_minutes" />
+                <field name="shift_id" />
+                <field name="holiday_type" force_save="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_attendance_log_view_search" model="ir.ui.view">
+        <field name="name">payroll.attendance.log.view.search</field>
+        <field name="model">payroll.attendance.log</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="employee_id"/>
+                <field name="nik"/>
+                <field name="department_id" />
+            </search>
+        </field>
+    </record>
+
+    <record id="view_payroll_attendance_log_form" model="ir.ui.view">
+        <field name="name">payroll.attendance.log.form</field>
+        <field name="model">payroll.attendance.log</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Log">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="date"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="shift_id"/>
+                            <field name="working_hours"/>
+                            <field name="is_latelog"/>
+                            <field name="source"/>
+                            <field name="source_id"/>
+                            <field name="is_manual"/>
+                            <field name="is_late_2"/>
+                        </group>
+                        <group>
+                            <field name="weekday"/>
+                            <field name="holiday"/>
+                            <field name="late_minutes"/>
+                            <field name="is_night_diff"/>
+                            <field name="ph_points"/>
+                            <field name="ot_hours"/>
+                            <field name="ot_points"/>
+                            <field name="is_late_3"/>
+                            <field name="is_late_4"/>
+                            <field name="nik"/>
+                            <field name="department_id"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="holiday_type" force_save="1"/>
+                            <field name="time_off_type"/>
+                            <field name="text" string="Note"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="attendance_log_record_rule_departments_and_categories" model="ir.rule">
+        <field name="name">See only attendance log with specific departments and categories</field>
+        <field name="model_id" ref="model_payroll_attendance_log"/>
+        <field name="domain_force">
+            [
+                '&amp;', 
+                ('department_id', 'in', user.department_ids.ids) if user.department_ids else (1, '=', 1),
+                ('employee_id.category_id', 'in', user.employee_category_ids.ids) if user.employee_category_ids else (1, '=', 1)
+            ]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+
+    <record id="attendance_log_department_category_rule" model="ir.rule">
+        <field name="name">Attendance Log Department or Category Access</field>
+        <field name="model_id" ref="model_payroll_attendance_log"/>
+        <field name="domain_force">
+            <![CDATA[
+                [
+                    '|',
+                    '&',
+                    ('department_id', 'in', user.groups_id.mapped('department_ids').ids),
+                    ('employee_id.category_id', 'in', user.groups_id.mapped('categories_ids').ids),
+                    ('department_id', 'in', user.groups_id.mapped('department_ids').ids)
+                ]
+            ]]>
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    
+
+</odoo>

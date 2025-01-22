@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_employee_categories_view_tree" model="ir.ui.view">
+        <field name="name">payroll.employee.categories.view.tree</field>
+        <field name="model">payroll.employee.categories</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="blocked" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_employee_categories_view_form" model="ir.ui.view">
+        <field name="name">payroll.employee.categories.view.form</field>
+        <field name="model">payroll.employee.categories</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <group col="2">
+                        <group>
+                            <field name="name" />
+                            <field name="leave_currency_code" />
+                            <field name="without_attendance_logs" />
+                            <field name="salary_cut_off" />
+                            <field name="salary_cut_off_2" />
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="salary_adjustment" />
+                            <field name="over_sick_deduction_to" />
+                            <field name="attendance_log_percent" />
+                            <field name="performance_percent" />
+                            <field name="blocked" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="salary_component" string="Salary Component">
+                            <field name="salary_components_ids">
+                                <tree editable="bottom">
+                                    <field name="salary_component_id" />
+                                    <field name="currency_id" />
+                                    <field name="amount" />
+                                    <field name="condition" />
+                                    <field name="recurring" />
+                                    <field name="minimum_working_duration" />
+                                    <field name="meal_type" />
+                                    <field name="pro_rate" />
+                                    <field name="is_basic_salary" invisible="1" force_save="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="salary_component_id" />
+                                        <field name="currency_id" />
+                                        <field name="amount" />
+                                        <field name="condition" />
+                                        <field name="recurring" />
+                                        <field name="minimum_working_duration" />
+                                        <field name="meal_type" />
+                                        <field name="pro_rate" />
+                                        <field name="is_basic_salary" invisible="1" force_save="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="deductions" string="Deduction">
+                            <field name="deductions_ids">
+                                <tree editable="bottom">
+                                    <field name="deduction_id" />
+                                    <field name="currency_id" />
+                                    <field name="amount" />
+                                    <field name="amount_from_basic_salary" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="deduction_id" />
+                                        <field name="currency_id" />
+                                        <field name="amount" />
+                                        <field name="amount_from_basic_salary" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="benefit" string="Benefit">
+                            <field name="benefits_ids">
+                                <tree editable="bottom">
+                                    <field name="benefit_id" />
+                                    <field name="currency_id" />
+                                    <field name="amount" />
+                                    <field name="limit_days" />
+                                    <field name="minimum_working_duration" />
+                                    <field name="recurring_month" />
+                                    <field name="cut_off_year" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="benefit_id" />
+                                        <field name="currency_id" />
+                                        <field name="amount" />
+                                        <field name="limit_days" />
+                                        <field name="minimum_working_duration" />
+                                        <field name="recurring_month" />
+                                        <field name="cut_off_year" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="time_off_setup" string="Time Off Setup">
+                            <field name="timeoff_setup_ids">
+                                <tree editable="bottom">
+                                    <field name="type" />
+                                    <field name="days_off" />
+                                    <field name="minimum_working_duration" />
+                                    <field name="reccuring_month" />
+                                    <field name="ticket_currency_id" />
+                                    <field name="ticket_amount" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="type" />
+                                        <field name="days_off" />
+                                        <field name="minimum_working_duration" />
+                                        <field name="reccuring_month" />
+                                        <field name="ticket_currency_id" />
+                                        <field name="ticket_amount" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="mistake_entries_detail" string="Mistake Entries Detail">
+                            <field name="mistake_entries_detail_ids">
+                                <tree editable="bottom">
+                                    <field name="deduction_id" />
+                                    <field name="mistake_detail_name" force_save="1"/>
+                                    <field name="currency_id" />
+                                    <field name="default_amount" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="deduction_id" />
+                                        <field name="mistake_detail_name" force_save="1"/>
+                                        <field name="currency_id" />
+                                        <field name="default_amount" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_employee_categories_view_search" model="ir.ui.view">
+        <field name="name">payroll.employee.categories.view.search</field>
+        <field name="model">payroll.employee.categories</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- <record id="rule_employee_category_access" model="ir.rule">
+        <field name="name">See only employee categories with specific employee categories</field>
+        <field name="model_id" ref="model_payroll_employee_categories"/>
+        <field name="domain_force">[('id', 'in', user.employee_category_ids.ids)] if user.employee_category_ids else [(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+</odoo>

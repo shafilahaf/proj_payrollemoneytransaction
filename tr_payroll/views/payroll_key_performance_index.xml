@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="payroll_key_performance_index_view_tree" model="ir.ui.view">
+        <field name="name">payroll.key.performance.index.view.tree</field>
+        <field name="model">payroll.key.performance.index</field>
+        <field name="arch" type="xml">
+            <tree string="Key Performance Index" js_class="button_in_tree_kpi">
+                <field name="year"/>
+                <field name="semester"/>
+                <field name="employee_id"/>
+                <field name="total_att_log_point"/>
+                <field name="total_performance_point"/>
+                <field name="kpi_point"/>
+                <button name="button_details" string="KPI SLIP" class="btn-white btn-outline-primary" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_key_performance_index_view_form" model="ir.ui.view">
+        <field name="name">payroll.key.performance.index.view.form</field>
+        <field name="model">payroll.key.performance.index</field>
+        <field name="arch" type="xml">
+            <form string="Key Performance Index">
+                <sheet>
+                    <group>
+                        <field name="year"/>
+                        <field name="semester"/>
+                        <field name="employee_id"/>
+                        <field name="total_att_log_point"/>
+                        <field name="total_performance_point"/>
+                        <field name="kpi_point"/>  
+                        <field name="kpi_details_ids" />                   
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_key_performance_index_view_search" model="ir.ui.view">
+        <field name="name">payroll.key.performance.index.view.search</field>
+        <field name="model">payroll.key.performance.index</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="employee_id"/>
+                <field name="year"/>
+                <field name="semester"/>
+            </search>
+        </field>
+    </record>
+</odoo>

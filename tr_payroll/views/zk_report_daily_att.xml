@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_zk_report_daily_attendance_tree_inherit" model="ir.ui.view">
+            <field name="name">zk.report.daily.attendance.tree.inherit</field>
+            <field name="model">zk.report.daily.attendance</field>
+            <field name="inherit_id" ref="hr_zk_attendance.view_zk_report_daily_attendance_tree"/>
+            <field name="arch" type="xml">
+                <field name="address_id" position="replace">
+                    <field name="device_department_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

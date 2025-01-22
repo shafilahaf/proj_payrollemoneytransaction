@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <data>
+
+    <record id="view_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='partner_id']" position="after">
+                <field name="department_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select Departments" invisible="1"/>
+                <field name="employee_category_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select Categories" invisible="1"/>
+                <field name="payroll_employee_id" invisible="1"/>
+                <field name="payroll_positions_level" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+<!-- 
+    <record id="payroll_res_users_view_form_profile_inherit" model="ir.ui.view">
+      <field name="name">payroll.res.users.preferences.form.inherit</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="hr.res_users_view_form_profile" />
+      <field name="arch" type="xml">
+          <xpath expr="//notebook" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//h2[@class='col-6 pl-0']" position="replace">
+              <h2 class="col-6 pl-0" invisible="1"/>
+          </xpath>
+          <xpath expr="//field[@name='can_edit']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='mobile_phone']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='work_phone']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='work_email']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='work_location_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='company_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='employee_parent_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='coach_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//div[@name='button_box']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='avatar_128']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='image_1920']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+         <xpath expr="//field[@name='mobile_phone']" position="after">
+            <group>
+                <group name="generalinformation" string="General Information">
+                    <group>
+                        <field name="payroll_employee_id" context="{'default_user_id': id}" invisible="1"/>
+                        <field name="payroll_username" />
+                        <button name="action_open_password_wizard" type="object" string="Change Password" class="oe_highlight"/>
+                        <field name="payroll_nik" readonly="1"/>
+                        <field name="payroll_manager_id" readonly="1"/>
+                        <field name="payroll_active_date" readonly="1"/>
+                        <field name="payroll_inactive_date" readonly="1"/>
+                        <field name="payroll_working_status" readonly="1"/>
+                        <field name="payroll_employee_status_id" readonly="1"/>
+                        <field name="payroll_company_id" readonly="1"/>
+                        <field name="payroll_category_id" readonly="1"/>
+                        <field name="payroll_current_position" readonly="1"/>
+                        <field name="payroll_last_leave_date" readonly="1"/>
+                        <field name="payroll_contract_id" readonly="1"/>
+                        <field name="payroll_contract_start_date" readonly="1"/>
+                        <field name="payoll_contract_end_date" readonly="1"/>
+                        <field name="payroll_current_website" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="payroll_department_id" readonly="1"/>
+                        <field name="payroll_case_of_inactivity" readonly="1"/>
+                        <field name="payroll_address" readonly="1"/>
+                        <field name="payroll_address_2" readonly="1"/>
+                        <field name="payroll_phone" readonly="1"/>
+                        <field name="payroll_email" readonly="1"/>
+                        <field name="payroll_emergency_contact" readonly="1"/>
+                        <field name="payroll_emergency_phone" readonly="1"/>
+                    </group>
+                </group>
+                <group name="administrations" string="Administration">
+                    <field name="payroll_gender" readonly="1"/>
+                    <field name="payroll_date_of_birth" readonly="1"/>
+                    <field name="payroll_country_id" readonly="1"/>
+                    <field name="payroll_city_id" readonly="1"/>
+                    <field name="payroll_visa_number" readonly="1"/>
+                    <field name="payroll_visa_expire_date" readonly="1"/>
+                    <field name="payroll_passport_number" readonly="1"/>
+                    <field name="payroll_passport_expire_date" readonly="1"/>
+                    <field name="payroll_bank_id" readonly="1"/>
+                    <field name="payroll_bank_account_number" readonly="1"/>
+                </group>
+            </group>
+          </xpath>            
+          <xpath expr="//field[@name='payroll_employee_id']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_nik']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_manager_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_active_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_inactive_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_working_status']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_employee_status_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_company_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_category_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_current_position']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_last_leave_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_contract_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_contract_start_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payoll_contract_end_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_current_website']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_department_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_case_of_inactivity']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_address']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_address_2']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_phone']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_email']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_emergency_contact']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_emergency_phone']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_gender']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_date_of_birth']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_country_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_city_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_visa_number']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_visa_expire_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_passport_number']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_username']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_passport_expire_date']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_bank_id']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='payroll_bank_account_number']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//group[@name='gen_information']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//group[@name='administration']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//header" position="inside">
+            <button name="action_open_password_wizard" type="object" string="Change Password" class="oe_highlight"/>
+          </xpath>
+      </field>
+    </record> -->
+
+    <!-- <record id="view_users_form_inherit_payroll" model="ir.ui.view">
+        <field name="name">users.form.inherit.payroll</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='avatar_128']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='image_1920']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//notebook" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//h1" position="after">
+                <group>
+                    <field name="payroll_employee_id" context="{'default_user_id': id}" invisible="1"/>
+                    <field name="payroll_nik" readonly="1"/>
+                </group>
+                <group name="gen_information" string="General Information">
+                    <group>
+                        <field name="payroll_username" />
+                        <field name="payroll_manager_id" readonly="1"/>
+                        <field name="payroll_active_date" readonly="1"/>
+                        <field name="payroll_inactive_date" readonly="1"/>
+                        <field name="payroll_working_status" readonly="1"/>
+                        <field name="payroll_employee_status_id" readonly="1"/>
+                        <field name="payroll_company_id" readonly="1"/>
+                        <field name="payroll_category_id" readonly="1"/>
+                        <field name="payroll_current_position" readonly="1"/>
+                        <field name="payroll_last_leave_date" readonly="1"/>
+                        <field name="payroll_contract_id" readonly="1"/>
+                        <field name="payroll_contract_start_date" readonly="1"/>
+                        <field name="payoll_contract_end_date" readonly="1"/>
+                        <field name="payroll_current_website" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="payroll_department_id" readonly="1"/>
+                        <field name="payroll_case_of_inactivity" readonly="1"/>
+                        <field name="payroll_address" readonly="1"/>
+                        <field name="payroll_address_2" readonly="1"/>
+                        <field name="payroll_phone" readonly="1"/>
+                        <field name="payroll_email" readonly="1"/>
+                        <field name="payroll_emergency_contact" readonly="1"/>
+                        <field name="payroll_emergency_phone" readonly="1"/>
+                    </group>
+                </group>
+                <group name="administration" string="Administration">
+                    <field name="payroll_gender" readonly="1"/>
+                    <field name="payroll_date_of_birth" readonly="1"/>
+                    <field name="payroll_country_id" readonly="1"/>
+                    <field name="payroll_city_id" readonly="1"/>
+                    <field name="payroll_visa_number" readonly="1"/>
+                    <field name="payroll_visa_expire_date" readonly="1"/>
+                    <field name="payroll_passport_number" readonly="1"/>
+                    <field name="payroll_passport_expire_date" readonly="1"/>
+                    <field name="payroll_bank_id" readonly="1"/>
+                    <field name="payroll_bank_account_number" readonly="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//footer" position="inside">
+                <button name="action_open_password_wizard" type="object" string="Change Password" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record> -->
+
+
+
+  </data>
+
+</odoo>

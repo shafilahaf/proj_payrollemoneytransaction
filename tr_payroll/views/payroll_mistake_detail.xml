@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_mistake_detail_view_tree" model="ir.ui.view">
+        <field name="name">payroll.mistake.detail.view.tree</field>
+        <field name="model">payroll.mistake.detail</field>
+        <field name="arch" type="xml">
+            <tree string="" js_class="button_in_tree_mistake_detail">
+                <field name="name" />
+                <field name="deduction_name" />
+                <field name="currency_id" />
+                <field name="default_amount" />
+                <field name="categories_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_mistake_detail_view_form" model="ir.ui.view">
+        <field name="name">payroll.mistake.detail.view.form</field>
+        <field name="model">payroll.mistake.detail</field>
+        <field name="arch" type="xml">
+            <form string="" >
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="deduction_id" />
+                        <field name="deduction_name" />
+                        <field name="currency_id" />
+                        <field name="default_amount" />
+                        <field name="categories_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_attendance_device_view_tree" model="ir.ui.view">
+        <field name="name">payroll.attendance.device.view.tree</field>
+        <field name="model">payroll.attendance.device</field>
+        <field name="arch" type="xml">
+            <tree string="">
+               
+                <field name="nik" />
+                <!-- <field name="department_id" /> -->
+                <field name="punch_type" />
+                <field name="punching_time" />
+                <field name="punch_date" />
+                <field name="department" />
+                <field name="is_processed" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_attendance_device_view_search" model="ir.ui.view">
+        <field name="name">payroll.attendance.device.view.search</field>
+        <field name="model">payroll.attendance.device</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="nik"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="payroll_attendance_device_view_form" model="ir.ui.view">
+        <field name="name">payroll.attendance.device.view.form</field>
+        <field name="model">payroll.attendance.device</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <!-- <button string="test" name="batch_update_att_log" type="object" class="oe_highlight"/> -->
+                </header>
+                <sheet>
+                    <group>
+                       
+                        <field name="nik" />
+                        <!-- <field name="department_id" /> -->
+                        <field name="punch_type" />
+                        <field name="punching_time" />
+                      
+                        <field name="department" />
+                        <field name="is_processed" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="attendance_device_record_rule_departments" model="ir.rule">
+        <field name="name">See only attendance device with specific departments</field>
+        <field name="model_id" ref="model_payroll_attendance_device"/>
+        <field name="domain_force">
+            [('device_department_id', 'in', user.department_ids.ids)] if user.department_ids else [(1, '=', 1)]
+        </field>
+        <field name="groups" eval="[(4, ref('group_payroll_administrator'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- payroll.device.department tree view -->
+    <record id="payroll_device_department_view_tree" model="ir.ui.view">
+        <field name="name">payroll.device.department.view.tree</field>
+        <field name="model">payroll.device.department</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- payroll.device_department form view -->
+    <record id="payroll_device_department_view_form" model="ir.ui.view">
+        <field name="name">payroll.device_department.view.form</field>
+        <field name="model">payroll.device.department</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="active" invisible="1"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_device_department_view_search" model="ir.ui.view">
+        <field name="name">payroll.device_department.view.search</field>
+        <field name="model">payroll.device.department</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- <record id="device_department_record_rule" model="ir.rule">
+        <field name="name">See only device departments with specific device departments</field>
+        <field name="model_id" ref="model_payroll_device_department"/>
+        <field name="domain_force">[('id', 'in', user.department_ids.ids)] if user.department_ids else [(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+</odoo>

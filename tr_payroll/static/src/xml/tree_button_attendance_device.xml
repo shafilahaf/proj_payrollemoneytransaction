@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+   <t t-extend="ListView.buttons" t-name="tr_payroll.buttonattendancedevice">
+       <t t-jquery="button.o_list_button_add" t-operation="after">
+           <button type="button" class="btn btn-warning open_wizard_action">
+               Convert All Dept.
+           </button>
+       </t>
+   </t>
+</templates>

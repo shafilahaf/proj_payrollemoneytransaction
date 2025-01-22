@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tr_mail_channel_view_form" model="ir.ui.view">
+    <field name="name">tr.mail.channel.form</field>
+    <field name="model">mail.channel</field>
+    <field name="inherit_id" ref="mail.mail_channel_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//notebook/page[@name='members']" position="after">
+            <page string="Lock Edit Chat" name="tr_settings">
+                <group>
+                    <field name="prevent_edit_delete_message" widget="boolean_toggle"/>
+                </group>
+            </page>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>

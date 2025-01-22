@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_payroll_my_profile_wizard" model="ir.ui.view">
+        <field name="name">payroll.my.profile.wizard.view.form</field>
+        <field name="model">payroll.my.profile.wizard</field>
+        <field name="arch" type="xml">
+            <form string="User Profile">
+                <sheet>
+                <group>
+                    <h1>
+                        <field name="payroll_employee_name" readonly="1"/>
+                    </h1>
+                </group>
+                    <!-- Hidden Fields -->
+                    <group>
+                        <field name="payroll_employee_id" context="{'default_user_id': id}" invisible="1"/>
+                        <field name="payroll_nik" readonly="1"/>
+                        <field name="payroll_username"/>
+                        <field name="ir_action_wizard_id" invisible="1"/>
+                        <field name="value_ir_action_wizard" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="General Information">
+                            <!-- General Information Section -->
+                            <!-- <group name="gen_information" string="General Information"> -->
+                                <group>
+                                <group name="column">
+                                    <field name="payroll_manager_id" readonly="1"/>
+                                    <field name="payroll_active_date" readonly="1"/>
+                                    <field name="payroll_inactive_date" readonly="1"/>
+                                    <field name="payroll_working_status" readonly="1"/>
+                                    <field name="payroll_employee_status_id" readonly="1"/>
+                                    <field name="payroll_company_id" readonly="1"/>
+                                    <field name="payroll_category_id" readonly="1"/>
+                                    <field name="payroll_current_position" readonly="1"/>
+                                    <field name="payroll_last_leave_date" readonly="1"/>
+                                    <field name="payroll_contract_id" readonly="1"/>
+                                    <field name="payroll_contract_start_date" readonly="1"/>
+                                    <field name="payoll_contract_end_date" readonly="1"/>
+                                    <field name="payroll_current_website" readonly="1"/>
+                                </group>
+                                <!-- <group> -->
+                                <group name="column">
+                                    <field name="payroll_department_id" readonly="1"/>
+                                    <field name="payroll_case_of_inactivity" readonly="1"/>
+                                    <field name="payroll_address" readonly="1"/>
+                                    <field name="payroll_address_2" readonly="1"/>
+                                    <field name="payroll_phone" readonly="1"/>
+                                    <field name="payroll_email" readonly="1"/>
+                                    <field name="payroll_emergency_contact" readonly="1"/>
+                                    <field name="payroll_emergency_phone" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                            <!-- </group> -->
+
+                            <!-- Administration Section -->
+                        <page string="Administration">
+                            <!-- <group name="administration" string="Administration"> -->
+                                <group>
+                                    <field name="payroll_gender" readonly="1"/>
+                                    <field name="payroll_date_of_birth" readonly="1"/>
+                                    <field name="payroll_country_id" readonly="1"/>
+                                    <field name="payroll_city_id" readonly="1"/>
+                                    <field name="payroll_visa_number" readonly="1"/>
+                                    <field name="payroll_visa_expire_date" readonly="1"/>
+                                    <field name="payroll_passport_number" readonly="1"/>
+                                    <field name="payroll_passport_expire_date" readonly="1"/>
+                                    <field name="payroll_bank_id" readonly="1"/>
+                                    <field name="payroll_bank_account_number" readonly="1"/>
+                                </group>
+                            <!-- </group> -->
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                <!-- Footer Section -->
+                <footer>
+                    <button string="Save" type="object" name="action_save" class="btn-primary"/>
+                    <button name="action_open_password_wizard" type="object" string="Change Password" class="btn-primary"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

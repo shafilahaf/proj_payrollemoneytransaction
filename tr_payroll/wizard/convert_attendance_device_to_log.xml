@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_convert_att_device_to_log_view_form" model="ir.ui.view">
+        <field name="name">payroll.convert.att.device.to.log.view.form</field>
+        <field name="model">payroll.convert.att.device.to.log</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="start_date" />
+                        <field name="end_date" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Convert All" name="convert_att_device_to_log_all_dept" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

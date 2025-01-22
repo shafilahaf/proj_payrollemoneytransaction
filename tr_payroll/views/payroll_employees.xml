@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_employees_view_tree" model="ir.ui.view">
+        <field name="name">payroll.employees.view.tree</field>
+        <field name="model">payroll.employees</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="nik" />
+                <field name="company_id" />
+                <field name="department_id" />
+                <field name="category_id" />
+                <field name="current_position" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_employees_view_form" model="ir.ui.view">
+        <field name="name">payroll.employees.view.form</field>
+        <field name="model">payroll.employees</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <field name="picture" widget="image" class="oe_right oe_avatar" options='{"web.image": true}'/>
+                    <div class="oe_title">
+
+                        <label for="name" string="Employee Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="o_text_overflow" name="name" />
+                            </div>
+                        </h1>
+                        
+                        <label for="nik" string="NIK"/>
+                        <h2><field name="nik" attrs="{'readonly': [('can_edit_nik_dept', '=', False)]}"/></h2> <!--readonly="1"-->
+
+                        <label for="username" string="Username"/>
+                        <h2><field name="username" /></h2>
+
+                        <label for="company_id" string="Company"/>
+                        <h2><field name="company_id" /></h2>
+                        <field name="active" invisible="1"/>
+                    </div>
+                    <notebook>
+                        <page name="general" string="General Information">
+                            <group col="2">
+                                <group>
+                                    <field name="can_edit_nik_dept" invisible="1"/>
+                                    <field name="username"/>
+                                    <field name="gender" />
+                                    <field name="address" />
+                                    <field name="address_2" />
+                                    <field name="phone" />
+                                    <field name="email" />
+                                    <field name="emergency_contact" />
+                                    <field name="emergency_phone" />
+                                    <field name="manager_id" />
+                                    <field name="active_leave_date" />
+                                    <field name="last_leave_date" />
+                                    <field name="notes_last_leave_date" />
+                                    <field name="next_leave_date" />
+                                    <field name="remaining_sick_leave" />
+                                    <field name="user_id" />
+                                </group>
+                                <group>
+                                    <field name="active_date" />
+                                    <field name="inactive_date" />
+                                    <field name="working_status" />
+                                    <field name="contract_id" />
+                                    <field name="contract_start_date" />
+                                    <field name="contract_end_date" />
+                                    <field name="employee_status_id" />
+                                    <field name="current_website" />
+                                    <field name="department_id" attrs="{'readonly': [('can_edit_nik_dept', '=', False)]}"/> <!--readonly="1"-->
+                                    <field name="category_id" />
+                                    <field name="current_position" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="administration" string="Administration">
+                            <group>
+                                <field name="date_of_birth" />
+                                <field name="country_id" />
+                                <field name="city_id" />
+                                <field name="visa_number" />
+                                <field name="visa_expire_date" />
+                                <field name="passport_number" />
+                                <field name="passport_expire_date" />
+                                <field name="case_of_inactivity" />
+                                <field name="bank_id" />
+                                <field name="bank_account_number" />
+                                <field name="bank_account_holder_name"/>
+                            </group>
+                        </page>
+                        <page name="salary" string="Salary">
+                            <field name="emp_salary_ids">
+                                <tree editable="bottom">
+                                    <field name="salary_component_id" force_save="1"/>
+                                    <field name="currency_id" />
+                                    <field name="amount" />
+                                    <field name="condition" />
+                                    <field name="recurring" />
+                                    <field name="minimum_working_duration" />
+                                    <field name="meal_type" />
+                                    <field name="pro_rate" />
+                                    <field name="last_increment_salary_date" readonly="1" force_save="1"/>
+                                    <field name="last_increment_salary_amount" readonly="1" force_save="1"/>
+                                    <field name="is_basic_salary" force_save="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="salary_component_id" force_save="1"/>
+                                        <field name="currency_id" />
+                                        <field name="amount" />
+                                        <field name="condition" />
+                                        <field name="recurring" />
+                                        <field name="minimum_working_duration" />
+                                        <field name="meal_type" />
+                                        <field name="pro_rate" />
+                                        <field name="last_increment_salary_date" readonly="1" force_save="1"/>
+                                        <field name="last_increment_salary_amount" readonly="1" force_save="1"/>
+                                        <field name="is_basic_salary" force_save="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="shift" string="Shift">
+                            <field name="emp_shift_ids">
+                                <tree editable="bottom">
+                                    <field name="shifts_id" />
+                                    <field name="start_date" />
+                                    <field name="end_date" />
+                                    <field name="companies_id" />
+                                    <field name="website_id" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="shifts_id" />
+                                        <field name="start_date" />
+                                        <field name="end_date" />
+                                        <field name="companies_id" />
+                                        <field name="website_id" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="deduction" string="Deduction">
+                            <field name="emp_deduction_ids">
+                                <tree editable="bottom">
+                                    <field name="deduction_id" />
+                                    <field name="currency_id" />
+                                    <field name="amount" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="deduction_id" />
+                                        <field name="currency_id" />
+                                        <field name="amount" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_employee_view_search" model="ir.ui.view">
+        <field name="name">payroll.employees.view.search</field>
+        <field name="model">payroll.employees</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+                <field name="nik"/>
+                <field name="department_id" />
+                <field name="category_id" />
+                <field name="current_position" />
+            </search>
+        </field>
+    </record>
+
+    <!-- <record id="employees_record_rule_departments_and_categories" model="ir.rule">
+        <field name="name">See only employees with specific departments and categories</field>
+        <field name="model_id" ref="model_payroll_employees"/>
+        <field name="domain_force">
+            [
+                '&amp;', 
+                ('department_id', 'in', user.department_ids.ids) if user.department_ids else (1, '=', 1),
+                ('category_id', 'in', user.employee_category_ids.ids) if user.employee_category_ids else (1, '=', 1)
+            ]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+
+    <!-- <record id="rule_employee_visibility_by_position_level" model="ir.rule">
+        <field name="name">Employee Visibility by Position Level</field>
+        <field name="model_id" ref="model_payroll_employees"/>
+        <field name="domain_force">['|', ('current_position.level', '>', user.payroll_positions_level), ('id', '=', user.payroll_employee_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record> -->
+
+   <!-- <record id="employee_department_category_rule" model="ir.rule">
+        <field name="name">Employee Department or Category Access</field>
+        <field name="model_id" ref="model_payroll_employees"/>
+        <field name="domain_force">
+            <![CDATA[
+                [
+                    '&',
+                    '&',
+                    ('department_id', 'in', user.groups_id.mapped('department_ids').ids),
+                    ('category_id', 'in', user.groups_id.mapped('categories_ids').ids),
+                    ('department_id', 'in', user.groups_id.mapped('department_ids').ids)
+                ]
+            ]]>
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record> -->
+
+
+
+</odoo>

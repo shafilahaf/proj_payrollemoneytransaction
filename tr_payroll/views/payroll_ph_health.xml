@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_ph_health_view_tree" model="ir.ui.view">
+        <field name="name">payroll.ph.health.view.tree</field>
+        <field name="model">payroll.ph.health</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="start_amount" />
+                <field name="end_amount" />
+                <field name="compensation_range" />
+                <field name="tax_rate_percent" />
+                <field name="prescribed_wtx" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_ph_health_view_form" model="ir.ui.view">
+        <field name="name">payroll.ph.health.view.form</field>
+        <field name="model">payroll.ph.health</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="start_amount" />
+                        <field name="end_amount" />
+                        <field name="compensation_range" />
+                        <field name="tax_rate_percent" />
+                        <field name="prescribed_wtx" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- sequence -->
+    <record id="payroll_ph_health_sequence" model="ir.sequence">
+        <field name="name">payroll.ph.health</field>
+        <field name="code">payroll.ph.health</field>
+        <field name="prefix">PH-HEALTH-</field>
+        <field name="padding">4</field>
+    </record>
+
+</odoo>

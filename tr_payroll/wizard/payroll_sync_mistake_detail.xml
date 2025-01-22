@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_sync_mistake_detail_wizard_view_form" model="ir.ui.view">
+        <field name="name">payroll.sync.mistake.detail.wizard.view.form</field>
+        <field name="model">payroll.sync.mistake.detail</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="desc" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Sync" name="sync_mistake_detail" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

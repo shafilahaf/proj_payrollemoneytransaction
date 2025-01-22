@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_salary_adjustment_header_view_search" model="ir.ui.view">
+        <field name="name">payroll.salary.adjustment.header.view.search</field>
+        <field name="model">payroll.salary.adjustment.header</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" />
+                <field name="department_id" />
+                <field name="category_id" />
+                <field name="adjustment_date" />
+            </search>
+        </field>
+    </record>
+
+    <record id="payroll_salary_adjustment_header_view_tree" model="ir.ui.view">
+        <field name="name">payroll.salary.adjustment.header.view.tree</field>
+        <field name="model">payroll.salary.adjustment.header</field>
+        <field name="arch" type="xml">
+            <tree string="" js_class="tree_button_salary_adjustment_import">
+                <field name="name" />
+                <field name="adjustment_date" />
+                <field name="department_id" />
+                <field name="category_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_salary_adjustment_detail_view_form" model="ir.ui.view">
+        <field name="name">payroll.salary.adjustment.detail.view.form</field>
+        <field name="model">payroll.salary.adjustment.header</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_done" string="Confirm" type="object" class="btn-primary" />
+                    <button name="add_eligible_employees" string="Eligible Employee" type="object" class="btn-secondary" />
+                    <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="adjustment_date" />
+                        <field name="department_id" />
+                        <field name="category_id" />
+                        <field name="created_by" />
+                    </group>
+                    <notebook>
+                        <page name="detail_salary_adj" string="Details">
+                            <field name="salary_adjustment_detail_ids">
+                                <tree editable="bottom">
+                                    <field name="employee_id" />
+                                    <field name="employee_basic_salary" force_save="1"/>
+                                    <field name="adjustment_type" />
+                                    <field name="adjustment_amount" />
+                                    <field name="adjustment_reason" />
+                                    <field name="total_salary" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="employee_id" />
+                                        <field name="employee_basic_salary" force_save="1"/>
+                                        <field name="adjustment_type" />
+                                        <field name="adjustment_amount" />
+                                        <field name="adjustment_reason" />
+                                        <field name="total_salary" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sequence -->
+    <record id="payroll_salary_adjustment_header_sequence" model="ir.sequence">
+        <field name="name">payroll.salary.adjustment.header.sequence</field>
+        <field name="code">payroll.salary.adjustment.header</field>
+        <field name="prefix">SAH-</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- <record id="salary_adjustment_record_rule_departments_and_categories" model="ir.rule">
+        <field name="name">See only salary adjustment with specific departments and categories</field>
+        <field name="model_id" ref="model_payroll_salary_adjustment_header"/>
+        <field name="domain_force">
+            [
+                '&amp;', 
+                ('department_id', 'in', user.department_ids.ids) if user.department_ids else (1, '=', 1),
+                ('category_id', 'in', user.employee_category_ids.ids) if user.employee_category_ids else (1, '=', 1)
+            ]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+
+</odoo>

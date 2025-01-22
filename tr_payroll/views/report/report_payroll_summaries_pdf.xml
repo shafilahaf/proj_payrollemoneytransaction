@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_payroll_summaries_template_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <body>
+                        <h2 class="centered-text"><strong>SALARY SLIP </strong></h2>
+                        <h4 class="centered-text"><t t-esc="doc.month_text"/> - <t t-esc="doc.year"/></h4>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <table class="employee-info">
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.name"/>
+                                        </tr>
+                                        <tr>
+                                            <td>NIK</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.nik"/>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="employee-info">
+                                        <tr>
+                                            <td>Company</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.company_id.name"/>
+                                        </tr>
+                                        <tr>
+                                            <td>Department</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.department_id.name"/>
+                                        </tr>
+                                        <tr>
+                                            <td>Position</td>
+                                            <td>:</td>
+                                            <td t-esc="doc.employee_id.current_position.name"/>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <div class="container">
+                            <!-- Row for Basic and Attendance -->
+                            <div class="row">
+                                <!-- Column for Basic and Deductions Table -->
+                                <div class="column">
+                                    <!-- Basic Table -->
+                                    <h2>BASIC</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Currency</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="doc.payroll_summary_detail_ids" t-as="basic">
+                                                <t t-if="basic.type == 1">
+                                                    <td>
+                                                        <t t-esc="basic.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="basic.currency_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="basic.net_amount" t-options='{"widget": "float", "precision": 2}'/>
+                                                    </td> 
+                                                </t>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- Add some space between Basic and Deductions Table -->
+                                    <div style="margin-top: 10px;"></div>
+                                    <!-- Deductions Table -->
+                                    <h2>DEDUCTIONS</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Currency</th>
+                                                <th>Times</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="doc.payroll_summary_detail_ids" t-as="basic">
+                                                <t t-if="basic.type == 2">
+                                                    <td>
+                                                        <t t-esc="basic.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="basic.currency_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="basic.days_count"/>
+                                                    </td>
+                                                    <td class="amount-align">
+                                                        <t t-esc="'{:,.2f}'.format(basic.net_amount)" />
+                                                    </td> 
+                                                </t>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Attendance beside Basic -->
+                                <div class="column">
+                                    <h2>ATTENDANCE</h2>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>Total Working</td>
+                                                <td class="att-times" t-esc="doc.total_work_days"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Days In</td>
+                                                <td class="att-times" t-esc="doc.days_in"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Days Absence</td>
+                                                <td class="att-times" t-esc="doc.days_absent"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Days Leaves</td>
+                                                <td class="att-times" t-esc="doc.days_leave"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Sick Permission</td>
+                                                <td class="att-times" t-esc="doc.sick_permission"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Days Off</td>
+                                                <td class="att-times" t-esc="doc.days_off"/>
+                                            </tr>
+                                            <tr>
+                                                <td>Days Permission</td>
+                                                <td class="att-times" t-esc="doc.days_permission"/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="container">
+                            <div class="row">
+                                <div class="column">
+                                    <h2>Reimbursement and Rewards</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Currency</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="doc.payroll_summary_detail_ids" t-as="basic">
+                                                <t t-if="basic.type in [3,4]">
+                                                    <td>
+                                                        <t t-esc="basic.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="basic.currency_id.name"/>
+                                                    </td>
+                                                    <td class="amount-align">
+                                                        <t t-esc="basic.net_amount" t-options='{"widget": "float", "precision": 2}'/>
+                                                    </td> 
+                                                </t>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="column">
+                                    <h2>SUMMARY</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Currency</th>
+                                                <th>Net Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr t-foreach="doc.summary_grouped_by_currency" t-as="summary">
+                                                <td>
+                                                    <t t-esc="summary.currency_id.name"/>
+                                                </td>
+                                                <td class="amount-align">
+                                                    <!-- <t t-esc="summary.net_amount"/> -->
+                                                    <t t-esc="'{:,.2f}'.format(summary.net_amount)" />
+                                                </td> 
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="page-break"></div>
+
+                            <h4>ATTENDANCE LOGS</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th>Working Hour</th>
+                                        <th>Status</th>
+                                        <th>Late</th>
+                                        <th>Late 2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="sorted(doc.attendance_log_ids, key=lambda att: att.date)" t-as="att">
+                                        <td>
+                                            <t t-esc="att.date"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="context_timestamp(att.start_time).strftime('%H:%M:%S')" />
+                                        </td>
+                                        <td>
+                                            <t t-if="att.end_time">
+                                                <t t-esc="context_timestamp(att.end_time).strftime('%H:%M:%S')"/>
+                                            </t>
+                                            <t t-else="">
+                                            </t>
+                                            
+                                        </td>
+                                        <td>
+                                            <t t-esc="int(att.working_hours)"/>
+                                        </td>
+                                        <td>
+                                            <!-- <t t-esc="att.time_off_type"/> -->
+                                            <t t-esc="att._get_time_off_type_label()"/>
+                                        </td>
+                                        <td>
+                                            <!-- <t t-esc="att.is_latelog"/> -->
+                                            <t t-if="att.is_latelog == True">
+                                                Yes
+                                            </t>
+                                            <t t-else="">
+                                                No
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <!-- <t t-esc="att.is_late_2"/> -->
+                                            <t t-if="att.is_late_2 == True">
+                                                Yes
+                                            </t>
+                                            <t t-else="">
+                                                No
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        <div class="signature-section">
+                            <table class="signature-table">
+                                <tr>
+                                    <td class="signature-left">
+                                        <p class="signature-title">Manager</p>
+                                        <t t-if="doc.employee_id.manager_id">
+                                            <p class="signature-name"><t t-esc="doc.employee_id.manager_id.name"/></p>
+                                        </t>
+                                        <t t-else="">
+                                            NO MANAGER
+                                        </t>
+                                    </td>
+                                    <td class="signature-right">
+                                        <p class="signature-title">Employee</p>
+                                        <p class="signature-name"><t t-esc="doc.employee_id.name"/></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </body>
+                    <style>
+                        <!-- @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); -->
+                        .centered-text {
+                            text-align: center;
+                        }
+                        .align-colon {
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                        .column {
+                            float: left;
+                            width: 47%;
+                            padding: 10px;
+                            <!-- height: 300px; -->
+                            height: auto;
+                            page-break-inside: avoid;
+                        }
+                        .row:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        table, th, td {
+                            border: 1px solid black;
+                        }
+                        th, td {
+                            padding: 15px;
+                            text-align: left;
+                        }
+                        th {
+                            background-color: #66b3cc;
+                        }
+                        .table-bordered {
+                            border: 1px solid black;
+                        }
+                        .table-bordered th, .table-bordered td {
+                            border: 1px solid black;
+                        }
+                        .table-bordered th {
+                            background-color: #f2f2f2;
+                        }
+                        .container {
+                            border: 1px solid black;
+                            padding: 10px;
+                            page-break-inside: avoid;
+                            height: auto;
+                        }
+                        body {
+                            font-family: 'Montserrat', sans-serif;
+                        }
+                        .employee-info {
+                            border: none;
+                        }
+                        .employee-info td {
+                            border: none;
+                            padding: 5px;
+                        }
+                        .page-break {
+                            page-break-before: always;
+                            /* Ensure the break is visible */
+                            display: block;
+                            height: 0;
+                            clear: both;
+                        }
+                        .amount-align {
+                            text-align: right;
+                            white-space: nowrap;
+                            color: #000000;
+                        }
+
+                        .att-times {
+                            text-align: center;
+                        }
+                        
+                        .signature-section {
+                            margin-top: 85px; /* Space between the table and signature section */
+                            border: none;
+                            padding: 0;
+                        }
+                        .signature-table {
+                            width: 100%; /* Full width for alignment */
+                            border-collapse: collapse; /* Remove spacing between cells */
+                            border: none;
+                        }
+                        .signature-table td {
+                            width: 50%; /* Each column takes up half of the table width */
+                            text-align: center; /* Center align text */
+                            border: none;
+                            padding: 0; /* Remove padding if not needed */
+                        }
+                        .signature-title {
+                            margin-bottom: 70px; /* Space between title and name */
+                        }
+                        .signature-name {
+                            margin-top: 0; /* Reset top margin if needed */
+                        }
+                    </style>
+
+                </div>
+                <div class="footer">
+                    <div class="footer-left" style="float: left;font-family: 'Montserrat', sans-serif;">
+                        Printed on <span t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/>
+                    </div>
+                    <div class="footer-right" style="float: right;font-family: 'Montserrat', sans-serif;">
+                        Page <span class="page"/> of <span class="topage"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

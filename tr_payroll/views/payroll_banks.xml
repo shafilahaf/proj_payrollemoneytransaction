@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- payroll.banks tree view -->
+    <record id="payroll_banks_view_tree" model="ir.ui.view">
+        <field name="name">payroll.banks.view.tree</field>
+        <field name="model">payroll.banks</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- payroll.banks form view -->
+    <record id="payroll_banks_view_form" model="ir.ui.view">
+        <field name="name">payroll.banks.view.form</field>
+        <field name="model">payroll.banks</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="active" invisible="1"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_banks_view_search" model="ir.ui.view">
+        <field name="name">payroll.banks.view.search</field>
+        <field name="model">payroll.banks</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>

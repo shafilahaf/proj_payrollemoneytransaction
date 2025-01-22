@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_employee_appraisals_view_search" model="ir.ui.view">
+        <field name="name">payroll.employee.appraisals.view.search</field>
+        <field name="model">payroll.employee.appraisals</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" />
+                <field name="employee_assessed" />
+                <field name="total_score" />
+            </search>
+        </field>
+    </record>
+
+    <record id="payroll_emp_appraisals_setup_header_view_tree" model="ir.ui.view">
+        <field name="name">payroll.emp.appraisals.setup.header.view.tree</field>
+        <field name="model">payroll.emp.appraisals.setup.header</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="title" />
+                <field name="category_id" />
+                <field name="created_by" />
+                <field name="active_appraisal" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_emp_appraisals_setup_header_view_form" model="ir.ui.view">
+        <field name="name">payroll.emp.appraisals.setup.header.view.form</field>
+        <field name="model">payroll.emp.appraisals.setup.header</field>
+        <field name="arch" type="xml">
+            <form string="Appraisal Setup" version="7.0">
+                <sheet>
+                    <group>
+                        <field name="date" />
+                        <field name="title" />
+                        <field name="category_id" />
+                        <field name="created_by" />
+                        <field name="active_appraisal" />
+                    </group>
+                    <notebook>
+                        <page name="line" string="Performance">
+                            <field name="appraisal_line_ids">
+                                <tree editable="bottom">
+                                    <field name="performance" />
+                                    <field name="scale_min" />
+                                    <field name="scale_max" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="performance" />
+                                        <field name="scale_min" />
+                                        <field name="scale_max" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_employee_appraisals_view_tree" model="ir.ui.view">
+        <field name="name">payroll.employee.appraisals.view.tree</field>
+        <field name="model">payroll.employee.appraisals</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="assessed_by" />
+                <field name="assessed_date" />
+                <field name="employee_assessed" />
+                <field name="total_score" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_employee_appraisals_view_form" model="ir.ui.view">
+        <field name="name">payroll.employee.appraisals.view.form</field>
+        <field name="model">payroll.employee.appraisals</field>
+        <field name="arch" type="xml">
+            <form string="Appraisal" version="7.0">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="assessed_by" />
+                        <field name="assessed_position" force_save="1"/>
+                        <field name="assessed_date" />
+                        <field name="employee_assessed" />
+                        <field name="total_score" />
+                    </group>
+                    <notebook>
+                        <page name="line" string="Appraisals" >
+                            <field name="appraisal_lines">
+                                <tree editable="bottom" create="0" delete="0">
+                                    <field name="question_id" force_save="1" readonly="1" />
+                                    <field name="score" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="question_id" force_save="1" readonly="1" />
+                                        <field name="score" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- sequence -->
+    <record id="payroll_emp_appraisal_sequence" model="ir.sequence">
+        <field name="name">Employee Appraisals</field>
+        <field name="code">payroll.employee.appraisals</field>
+        <field name="prefix">EA-</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- <record id="emp_appraisal_record_rule_categories" model="ir.rule">
+        <field name="name">See only employee appraisals with specific categories</field>
+        <field name="model_id" ref="model_payroll_emp_appraisals_setup_header"/>
+        <field name="domain_force">
+            [('category_id', 'in', user.employee_category_ids.ids)] if user.employee_category_ids else [(1, '=', 1)]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record> -->
+</odoo>

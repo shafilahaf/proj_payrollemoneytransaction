@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_groups_form_inherit" model="ir.ui.view">
+        <field name="name">res.groups.form.inherit</field>
+        <field name="model">res.groups</field>
+        <field name="inherit_id" ref="base.view_groups_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="inside">
+                <group>
+                    <button name="action_unlink_group_users" type="object" string="Unlink All Users" class="oe_highlight" icon="fa-trash"/>
+                </group>
+            </xpath>
+            <xpath expr="//sheet/group" position="inside">
+                <field name="is_active" modifiers="{}"/>
+                <field name="can_edit_mistake_entries" />
+                <field name="permitted_edit_nik_dept" />
+                <field name="department_ids" widget="many2many_tags"/>
+                <field name="categories_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+    
+</odoo>

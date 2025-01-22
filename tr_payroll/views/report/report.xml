@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+    <!-- Paperformat -->
+    <record id="report_qweb_paperformat_portrait_a4_payroll" model="report.paperformat">
+            <field name="name">Payroll A4 Portrait</field>
+            <field name="default" eval="True"/>            
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field> 
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">8</field>
+            <field name="margin_right">8</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">70</field>
+            <field name="dpi">90</field>
+    </record>
+    
+    <record id="report_payroll_sumarries_template" model="ir.actions.report">
+        <field name="name">Print Payroll Summaries</field> 
+        <field name="model">payroll.payroll.summaries</field>    
+        <field name="report_type">qweb-pdf</field>  
+        <field name="report_name">tr_payroll.report_payroll_summaries_template_pdf</field>  
+        <field name="report_file">tr_payroll.report_payroll_summaries_template_pdf</field>
+        <field name="paperformat_id" ref="report_qweb_paperformat_portrait_a4_payroll"/>  
+        <!-- <field name="binding_model_id" ref="model_payroll_payroll_summaries"/> -->
+        <field name="binding_type">report</field>            
+    </record> 
+
+    <record id="report_kpi_template" model="ir.actions.report">
+        <field name="name">Print Key Performance Index</field> 
+        <field name="model">payroll.key.performance.index</field>    
+        <field name="report_type">qweb-pdf</field>  
+        <field name="report_name">tr_payroll.report_kpi_template_pdf</field>  
+        <field name="report_file">tr_payroll.report_kpi_template_pdf</field>  
+        <field name="paperformat_id" ref="report_qweb_paperformat_portrait_a4_payroll"/> 
+        <!-- <field name="binding_model_id" ref="model_payroll_key_performance_index"/> -->
+        <field name="binding_type">report</field>            
+    </record> 
+
+    </data>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_employee_move_view_tree" model="ir.ui.view">
+        <field name="name">payroll.employee.move.view.tree</field>
+        <field name="model">payroll.employee.move</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="date" />
+                <field name="created_by" />
+                <field name="employee_id" />
+                <field name="location_from_id" />
+                <field name="location_to_id" />
+                <field name="nik_from" />
+                <field name="nik_to" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_employee_move_view_form" model="ir.ui.view">
+        <field name="name">payroll.employee.move.view.form</field>
+        <field name="model">payroll.employee.move</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="name" />
+                            <field name="date" />
+                            <field name="created_by" />
+                            <field name="employee_id" />
+                        </group>
+                        <group>
+                            <field name="location_from_id" force_save="1"/>
+                            <field name="location_to_id" />
+                            <field name="nik_from" force_save="1"/>
+                            <field name="nik_to" />
+                            <field name="category_from_id" force_save="1"/>
+                            <field name="category_to_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sequence -->
+    <record id="payroll_emp_move_sequence" model="ir.sequence">
+        <field name="name">payroll.employee.move.sequence</field>
+        <field name="code">payroll.employee.move</field>
+        <field name="prefix">EM-</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- <record id="employee_move_record_rule_departments" model="ir.rule">
+        <field name="name">See only employee move with specific departments</field>
+        <field name="model_id" ref="model_payroll_employee_move"/>
+        <field name="domain_force">
+            [('location_from_id', 'in', user.department_ids.ids)] if user.department_ids else [(1, '=', 1)]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+
+
+</odoo>

@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Actions -->
+    <record id="action_payroll_companies" model="ir.actions.act_window">
+        <field name="name">Companies</field>
+        <field name="res_model">payroll.companies</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_companies_view_search"/>  
+    </record>
+
+    <record id="action_payroll_restrict" model="ir.actions.act_window">
+        <field name="name">Restriction</field>
+        <field name="res_model">payroll.restrict</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'create': False, 'edit': True, 'delete': False}</field>
+        <field name="domain">[('employee_id', '!=', False)]</field>
+    </record>
+
+    <record id="action_payroll_mistake_detail" model="ir.actions.act_window">
+        <field name="name">Mistake Detail</field>
+        <field name="res_model">payroll.mistake.detail</field>
+        <field name="view_mode">tree</field>
+        <!-- <field name="domain">[('deduction_name','in',['Mistake 1', 'Mistake 2']), ('name', '!=', False)]</field> -->
+    </record>
+
+    <record id="action_payroll_contracts" model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">payroll.contracts</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_contracts_view_search"/>
+    </record>
+
+    <record id="action_payroll_banks" model="ir.actions.act_window">
+        <field name="name">Banks</field>
+        <field name="res_model">payroll.banks</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_banks_view_search"/>
+    </record>
+
+    <record id="action_payroll_benefits" model="ir.actions.act_window">
+        <field name="name">Benefits</field>
+        <field name="res_model">payroll.benefits</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_benefits_view_search"/>
+    </record>
+
+    <record id="action_payroll_countries" model="ir.actions.act_window">
+        <field name="name">Country</field>
+        <field name="res_model">payroll.countries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_countries_view_search"/>
+    </record>
+
+    <record id="action_payroll_currencies" model="ir.actions.act_window">
+        <field name="name">Currencies</field>
+        <field name="res_model">payroll.currencies</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_currencies_view_search"/>
+    </record>
+
+    <record id="action_payroll_att_device" model="ir.actions.act_window">
+        <field name="name">Attendance Device</field>
+        <field name="res_model">payroll.attendance.device</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_deductions" model="ir.actions.act_window">
+        <field name="name">Deductions</field>
+        <field name="res_model">payroll.deductions</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_deductions_view_search"/>
+    </record>
+
+    <record id="action_payroll_emp_status" model="ir.actions.act_window">
+        <field name="name">Employee Status</field>
+        <field name="res_model">payroll.employee.status</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_employee_status_view_search"/>
+    </record>
+
+    <record id="action_payroll_positions" model="ir.actions.act_window">
+        <field name="name">Positions</field>
+        <field name="res_model">payroll.positions</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_positions_view_search"/>
+    </record>
+
+    <record id="action_payroll_salary_component" model="ir.actions.act_window">
+        <field name="name">Salary Component</field>
+        <field name="res_model">payroll.salary.components</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_salary_component_view_search"/>
+    </record>
+
+    <record id="action_payroll_shifts" model="ir.actions.act_window">
+        <field name="name">Shift</field>
+        <field name="res_model">payroll.shifts</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_shifts_view_search"/>
+    </record>
+
+    <record id="action_payroll_att_log" model="ir.actions.act_window">
+        <field name="name">Attendance Logs</field>
+        <field name="res_model">payroll.attendance.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_device_department" model="ir.actions.act_window">
+        <field name="name">Device Department</field>
+        <field name="res_model">payroll.device.department</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_device_department_view_search"/>
+    </record>
+
+    <record id="action_payroll_employee_categories" model="ir.actions.act_window">
+        <field name="name">Employee Categories</field>
+        <field name="res_model">payroll.employee.categories</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_employee_categories_view_search"/>
+    </record>
+
+    <record id="action_payroll_employee" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">payroll.employees</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="payroll_employee_view_search"/>
+    </record>
+
+    <record id="action_payroll_mistake_entreis" model="ir.actions.act_window">
+        <field name="name">Mistake Entry</field>
+        <field name="res_model">payroll.mistake.entries.header</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('file', '=', False)]</field>
+    </record>
+
+    <record id="action_payroll_mistake_entreis_deduction_ph_upload" model="ir.actions.act_window">
+        <field name="name">Deduction PH Upload</field>
+        <field name="res_model">payroll.mistake.entries.header</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('payroll_mistake_entries_deduction_ph_upload_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('payroll_mistake_entries_deduction_ph_upload_view_form')})]"/>
+        <field name="domain">[('file', '!=', False)]</field>
+    </record>
+
+    <record id="action_payroll_key_performance_index" model="ir.actions.act_window">
+        <field name="name">Key Performance Index</field>
+        <field name="res_model">payroll.key.performance.index</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_time_off_req" model="ir.actions.act_window">
+        <field name="name">Time Off Requests</field>
+        <field name="res_model">payroll.time.off.request</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_payroll_emp_move" model="ir.actions.act_window">
+        <field name="name">Employee Move</field>
+        <field name="res_model">payroll.employee.move</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_salary_adjustment" model="ir.actions.act_window">
+        <field name="name">Salary Adjustment</field>
+        <field name="res_model">payroll.salary.adjustment.header</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_emp_appraisal_setup" model="ir.actions.act_window">
+        <field name="name">Appraisal Setup</field>
+        <field name="res_model">payroll.emp.appraisals.setup.header</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_payroll_summaries" model="ir.actions.act_window">
+        <field name="name">Payroll Summaries</field>
+        <field name="res_model">payroll.payroll.summaries</field>
+        <field name="domain">[('periode', '=', False)]</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_payroll_payroll_summaries_ph" model="ir.actions.act_window">
+        <field name="name">Payroll Summaries PH</field>
+        <field name="res_model">payroll.payroll.summaries</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('payroll_payroll_summaries_ph_view_tree')})]"/>
+        <field name="domain">[('periode', '!=', False)]</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- <record id="action_payroll_payroll_summaries_ext" model="ir.actions.act_window">
+        <field name="name">Payroll Summaries EXT</field>
+        <field name="res_model">payroll.payroll.summaries</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('payroll_payroll_summaries_ext_view_tree')})]"/>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+
+
+    <record id="action_payroll_emp_appraisal" model="ir.actions.act_window">
+        <field name="name">Appraisal</field>
+        <field name="res_model">payroll.employee.appraisals</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_payroll_absence_register" model="ir.actions.act_window">
+        <field name="name">Absence Register</field>
+        <field name="res_model">payroll.absence.register</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_time_off_reject_wizard" model="ir.actions.act_window">
+        <field name="name">Reject Time Off Request</field>
+        <field name="res_model">payroll.time.off.reject.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_request_id': active_id}</field>
+    </record>
+
+    <record id="action_payroll_approval_entries" model="ir.actions.act_window">
+        <field name="name">Approval Entries</field>
+        <field name="res_model">payroll.approval.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'create': False}</field>
+    </record>
+
+    <record id="action_payroll_approval_entries_pending_approvall" model="ir.actions.act_window">
+        <field name="name">Request to Approve</field>
+        <field name="res_model">payroll.approval.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('status', '=', '2')]</field>
+    </record>
+
+    <record id="action_payroll_approval_entries_rejected_approvall" model="ir.actions.act_window">
+        <field name="name">Rejected Approval</field>
+        <field name="res_model">payroll.approval.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('status', '=', '3')]</field>
+    </record>
+
+    <record id="action_payroll_approval_entries_approvedd" model="ir.actions.act_window">
+        <field name="name">Approved Approval</field>
+        <field name="res_model">payroll.approval.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('status', '=', '5')]</field>
+    </record>
+
+    <record id="action_payroll_ph_health" model="ir.actions.act_window">
+        <field name="name">PH Health</field>
+        <field name="res_model">payroll.ph.health</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Wizard Start-->
+    <record id="action_payroll_mistake_entries_wizard" model="ir.actions.act_window">
+        <field name="name">Mistake Entries</field>
+        <field name="res_model">payroll.mistake.entries.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_payroll_config_internal_wizard" model="ir.actions.act_window">
+        <field name="name">Config</field>
+        <field name="res_model">payroll.config.all</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_payroll_calculate_salary_wizard" model="ir.actions.act_window">
+        <field name="name">Calculate Salary</field>
+        <field name="res_model">payroll.calculate.salary.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_payroll_calculate_benefit_leaves_wizard" model="ir.actions.act_window"> 
+        <field name="name">Calculate Benefit and Leaves</field> 
+        <field name="res_model">payroll.calculate.benefit.leaves.wizard</field> 
+        <field name="view_mode">form</field> 
+        <field name="target">new</field> 
+    </record> 
+
+    <record id="action_payroll_recalculate_attendance_log_late_wizard" model="ir.actions.act_window"> 
+        <field name="name">Recalculate Attendance Log-Late</field> 
+        <field name="res_model">payroll.recalculate.attendance.log.late.wizard</field> 
+        <field name="view_mode">form</field> <field name="target">new</field> 
+    </record> 
+    
+    <record id="action_payroll_moving_employee_wizard" model="ir.actions.act_window"> 
+        <field name="name">Moving Employee</field> 
+        <field name="res_model">payroll.moving.employee.wizard</field> 
+        <field name="view_mode">form</field> 
+        <field name="target">new</field>
+    </record> 
+
+    <record id="action_payroll_salary_adj_bulk_wizard" model="ir.actions.act_window"> 
+        <field name="name">Salary Adjustment Import</field> 
+        <field name="res_model">payroll.salary.adjustment.bulk.wizard</field> 
+        <field name="view_mode">form</field> 
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_payroll_import_excel_employee_wizard" model="ir.actions.act_window"> 
+        <field name="name">Import Excel Employee</field> 
+        <field name="res_model">payroll.import.excel.employee.wizard</field> 
+        <field name="view_mode">form</field> <field name="target">new</field> 
+    </record>
+
+    <record id="action_payroll_summaries_report_excel_wizard" model="ir.actions.act_window"> 
+        <field name="name">Payroll Summaries Report Excel</field> 
+        <field name="res_model">payroll.summaries.report.excel.wizard</field> 
+        <field name="view_mode">form</field> 
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_res_users_password_wizard" model="ir.actions.act_window">
+        <field name="name">Change Password</field>
+        <field name="res_model">res.users.password.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+        
+    <!-- Wizard End -->
+
+    <!-- dianadi021 Start -->
+    <record id="action_payroll_shift_assign" model="ir.actions.act_window">
+        <field name="name">Shift Assign</field>
+        <field name="res_model">payroll.shift.assign.header</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_payroll_attendance_log_point" model="ir.actions.act_window">
+        <field name="name">Attendance Log Point</field>
+        <field name="res_model">payroll.attendance.log.point</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_payroll_holiday" model="ir.actions.act_window">
+        <field name="name">Holiday</field>
+        <field name="res_model">payroll.holiday</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_payroll_employee_shift_benefit" model="ir.actions.act_window">
+        <field name="name">Payroll Employee Shift Benefit</field>
+        <field name="res_model">payroll.employee.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- dianadi021 End -->
+
+    <record id="zk_machine_action" model="ir.actions.act_window">
+        <field name="name">Attendances</field>
+        <field name="res_model">zk.machine</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_zk_report_daily_attendancee" model="ir.actions.act_window">
+        <field name="name">Attendance Analysis</field>
+        <field name="res_model">zk.report.daily.attendance</field>
+        <field name="view_mode">tree</field>
+        <!-- <field name="context">{'search_default_my_attendance':1}</field> -->
+        <!-- <field name="search_view_id" ref="view_zk_report_daily_attendance_search" /> -->
+    </record>
+
+    <record id="action_payroll_scheduler_setup" model="ir.actions.act_window">
+        <field name="name">Scheduler Setup</field>
+        <field name="res_model">payroll.scheduler.setup</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_my_profile_wizard" model="ir.actions.act_window">
+        <field name="name">My Profile Wizard</field>
+        <field name="res_model">payroll.my.profile.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_payroll_my_profile_wizard"/> 
+        <field name="target">new</field> 
+        <field name="domain">[('payroll_employee_id', '=', uid)]</field>
+    </record>
+
+
+    <!-- Menuitem -->
+    <menuitem id="menu_payroll" name="Payroll Management" sequence="10"/>
+    <menuitem id="menu_payroll_data" name="Data" parent="menu_payroll" sequence="2"/>
+    <menuitem id="menu_payroll_master_data" name="Master Data" parent="menu_payroll_data" sequence="1"/>
+    <menuitem id="menu_payroll_companies" name="Companies" parent="menu_payroll_master_data" action="action_payroll_companies" sequence="1"/>
+    <menuitem id="menu_payroll_contracts" name="Contracts" parent="menu_payroll_master_data" action="action_payroll_contracts" sequence="2"/>
+    <menuitem id="menu_payroll_banks" name="Banks" parent="menu_payroll_master_data" action="action_payroll_banks" sequence="3"/>
+    <menuitem id="menu_payroll_benefits" name="Benefits" parent="menu_payroll_master_data" action="action_payroll_benefits" sequence="4"/>
+    <menuitem id="menu_payroll_countries" name="Countries" parent="menu_payroll_master_data" action="action_payroll_countries" sequence="5"/>
+    <menuitem id="menu_payroll_currencies" name="Currencies" parent="menu_payroll_master_data" action="action_payroll_currencies" sequence="6"/>
+    <menuitem id="menu_payroll_deductions" name="Deductions" parent="menu_payroll_master_data" action="action_payroll_deductions" sequence="7"/>
+    <menuitem id="menu_payroll_emp_status" name="Employee Status" parent="menu_payroll_master_data" action="action_payroll_emp_status" sequence="8"/>
+    <menuitem id="menu_payroll_positions" name="Positions" parent="menu_payroll_master_data" action="action_payroll_positions" sequence="9"/>
+    <menuitem id="menu_payroll_salary_component" name="Salary Component" parent="menu_payroll_master_data" action="action_payroll_salary_component" sequence="10"/>
+    <menuitem id="menu_payroll_shifts" name="Shift" parent="menu_payroll_master_data" action="action_payroll_shifts" sequence="11"/>
+    <menuitem id="menu_payroll_device_department" name="Device Department" parent="menu_payroll_master_data" action="action_payroll_device_department" sequence="12"/>
+    <menuitem id="menu_payroll_employee_categories" name="Employee Categories" parent="menu_payroll_data" action="action_payroll_employee_categories" sequence="2"/>
+    <menuitem id="menu_payroll_employee" name="Employees" parent="menu_payroll_data" action="action_payroll_employee" sequence="3"/>
+
+    <menuitem id="menu_payroll_employees_information" name="Employees Information" parent="menu_payroll" sequence="3"/>
+    <menuitem id="menu_payroll_att_log" name="Attendance Logs" parent="menu_payroll_employees_information" sequence="1"/>
+    <menuitem id="menu_payroll_att_logs" name="Attendance Logs" parent="menu_payroll_att_log" action="action_payroll_att_log" sequence="1"/>
+    <menuitem id="menu_payroll_att_device" name="Attendance Device" action="action_payroll_att_device" parent="menu_payroll_att_log" sequence="2" />
+    <menuitem id="menu_payroll_mistake_entries_wizard" name="Mistake Entries" parent="menu_payroll_employees_information" action="action_payroll_mistake_entries_wizard" sequence="2"/>
+    <menuitem id="menu_payroll_mistake_entreis_deduction_ph_upload" name="Deduction PH Upload" parent="menu_payroll_employees_information" action="action_payroll_mistake_entreis_deduction_ph_upload" sequence="3"/>
+    <menuitem id="menu_payroll_key_performance_index" name="Key Performance Index" parent="menu_payroll_employees_information" action="action_payroll_key_performance_index" sequence="4"/>
+    <menuitem id="menu_payroll_employee_shift_benefit" name="Payroll Employee Shift Benefit" parent="menu_payroll_employees_information" action="action_payroll_employee_shift_benefit" sequence="5"/>
+    <menuitem id="menu_payroll_payroll_summaries" name="Payroll Summary" parent="menu_payroll_employees_information" sequence="6"/>
+    <menuitem id="menu_payroll_payroll_summariess" name="Payroll Summaries" parent="menu_payroll_payroll_summaries" action="action_payroll_payroll_summaries" sequence="1"/>
+    <menuitem id="menu_payroll_payroll_summariess_ph" name="Payroll Summaries PH" parent="menu_payroll_payroll_summaries" action="action_payroll_payroll_summaries_ph" sequence="2"/>
+
+    <menuitem id="menu_payroll_transaction" name="Transactions" parent="menu_payroll" sequence="4"/>
+    <menuitem id="menu_payroll_mistake_entreis" name="Mistake Entry" parent="menu_payroll_transaction" action="action_payroll_mistake_entreis" sequence="1"/>
+    <menuitem id="menu_payroll_time_off_req" name="Time Off Requests" parent="menu_payroll_transaction" action="action_payroll_time_off_req" sequence="2"/>
+    <menuitem id="menu_payroll_absence_register" name="Absence Register" parent="menu_payroll_transaction" action="action_payroll_absence_register" sequence="3"/>
+    <menuitem id="menu_payroll_emp_move" name="Employee Move" parent="menu_payroll_transaction" action="action_payroll_emp_move" sequence="4"/>
+    <menuitem id="menu_payroll_approval_entreis" name="Approval Entries" parent="menu_payroll_transaction" sequence="5"/>
+    <menuitem id="menu_payroll_approval_entries" name="Approval Entries" parent="menu_payroll_approval_entreis" action="action_payroll_approval_entries" sequence="1"/>
+    <menuitem id="menu_payroll_approval_entries_pending_approval" name="Request to Approved" parent="menu_payroll_approval_entreis" action="action_payroll_approval_entries_pending_approvall" sequence="2"/>
+    <menuitem id="menu_payroll_approval_entries_rejected_approval" name="Rejected Approval" parent="menu_payroll_approval_entreis" action="action_payroll_approval_entries_rejected_approvall" sequence="3"/>
+    <menuitem id="menu_payroll_approval_entries_approved" name="Approved Approval" parent="menu_payroll_approval_entreis" action="action_payroll_approval_entries_approvedd" sequence="4"/>
+    <menuitem id="menu_payroll_salary_adjustment" name="Salary Adjustment" parent="menu_payroll_transaction" action="action_payroll_salary_adjustment" sequence="6"/>
+    <menuitem id="menu_payroll_emp_appraisal" name="Appraisal" parent="menu_payroll_transaction" action="action_payroll_emp_appraisal" sequence="7"/>
+    <menuitem id="menu_payroll_payroll_shift_assign" name="Shift Assign" parent="menu_payroll_transaction" action="action_payroll_shift_assign" sequence="5"/>
+
+    <menuitem id="menu_payroll_configuration" name="Configuration" parent="menu_payroll" sequence="5"/>
+    <menuitem id="menu_payroll_setup" name="Setup" parent="menu_payroll_configuration" sequence="1"/>
+    <menuitem id="menu_payroll_calculate_salary_wizard" name="Calculate Salary" parent="menu_payroll_setup" action="action_payroll_calculate_salary_wizard" sequence="1"/>
+    <menuitem id="menu_payroll_emp_appraisal_setup" name="Appraisal Setup" parent="menu_payroll_setup" action="action_payroll_emp_appraisal_setup" sequence="2"/>
+    <menuitem id="menu_payroll_scheduler_setup" name="Scheduler Setup" parent="menu_payroll_setup" action="action_payroll_scheduler_setup" sequence="98"/>
+    <menuitem id="menu_payroll_calculate_benefit_leaves_wizard" name="Calculate Benfit and Leaves" parent="menu_payroll_setup" action="action_payroll_calculate_benefit_leaves_wizard" sequence="2"/> 
+    <menuitem id="menu_payroll_recalculate_attendance_log_late_wizard" name="Recalculate Attendance Log-Late" parent="menu_payroll_setup" action="action_payroll_recalculate_attendance_log_late_wizard" sequence="3"/> 
+    <menuitem id="menu_payroll_moving_employee_wizard" name="Moving Employee" parent="menu_payroll_setup" action="action_payroll_moving_employee_wizard" sequence="4"/> 
+    <menuitem id="menu_payroll_import_excel_employee_wizard" name="Import Excel Employee" parent="menu_payroll_setup" action="action_payroll_import_excel_employee_wizard" sequence="5"/> 
+    <menuitem id="menu_payroll_emp_appraisal_setup" name="Appraisal Setup" parent="menu_payroll_setup" action="action_payroll_emp_appraisal_setup" sequence="6"/>
+    <menuitem id="menu_payroll_mistake_detail" name="Mistake Detail" parent="menu_payroll_setup" action="action_payroll_mistake_detail" sequence="7"/>
+    <menuitem id="zk_machine_sub_menu" parent="menu_payroll_setup" name="Attendance Device Configuration" action="zk_machine_action" sequence="99"/>
+    <menuitem id="menu_payroll_attendance_log_point" name="Attendance Log Point" parent="menu_payroll_setup" action="action_payroll_attendance_log_point" sequence="7"/>
+    <!-- <menuitem id="menu_payroll_restrict" name="Restriction" parent="menu_payroll_setup" action="action_payroll_restrict" sequence="99"/> --> <!--TODO: Hold dulu-->
+    <menuitem id="menu_payroll_ph_setup" name="PH Setup" parent="menu_payroll_configuration" sequence="2"/>
+    <menuitem id="menu_payroll_ph_health" name="PH Health" parent="menu_payroll_ph_setup" action="action_payroll_ph_health" sequence="1"/>
+    <menuitem id="menu_payroll_holiday" name="Holiday" parent="menu_payroll_ph_setup" action="action_payroll_holiday" sequence="2"/>
+    <menuitem id="menu_payroll_config_internal" name="Config TR internal" parent="menu_payroll_configuration" sequence="3" action='action_payroll_config_internal_wizard' groups="base.group_no_one"/>
+
+    <!-- <menuitem id="menu_payroll_my_profile" name="My Profile" parent="menu_payroll"  action="action_my_profile_wizard" sequence="7"/> -->
+</odoo>

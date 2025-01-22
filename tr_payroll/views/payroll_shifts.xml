@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_shifts_view_tree" model="ir.ui.view">
+        <field name="name">payroll.shifts.view.tree</field>
+        <field name="model">payroll.shifts</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="start_time" widget="float_time" />
+                <field name="duration" />
+                <field name="timezone" />
+                <field name="is_night_diff" />
+                <field name="color2" widget="color" />
+            </tree>
+        </field>
+    </record>
+    
+    <record id="payroll_shifts_view_form" model="ir.ui.view">
+        <field name="name">payroll.shifts.view.form</field>
+        <field name="model">payroll.shifts</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <group>
+                        <field name="name" />
+                        <field name="start_time" widget="float_time" />
+                        <field name="duration" />
+                        <field name="timezone" />
+                        <field name="is_night_diff" />
+                        <field name="color2" widget="color" />
+                        <field name="active" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_shifts_view_search" model="ir.ui.view">
+        <field name="name">payroll.shifts.view.search</field>
+        <field name="model">payroll.shifts</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_mistake_entries_header_view_tree" model="ir.ui.view">
+        <field name="name">payroll.mistake.entries.header.view.tree</field>
+        <field name="model">payroll.mistake.entries.header</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="created_by" />
+                <field name="date" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_mistake_entries_header_view_form" model="ir.ui.view">
+        <field name="name">payroll.mistake.entries.header.view.form</field>
+        <field name="model">payroll.mistake.entries.header</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_release" string="Confirm" type="object" class="btn-primary"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Mistake Entries"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="o_text_overflow" name="name" />
+                            </div>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="created_by" />
+                        <field name="date" />
+                        <field name="department_id" required="1" />
+                        <field name="category_id" />
+                        <field name="website_id" required="1"/>
+                    </group>
+                    <notebook>
+                        <page name="mistakedetails" string="Details">
+                            <field name="details_ids">
+                                <tree editable="bottom">
+                                    <field name="employee_id" required="1"/>
+                                    <field name="mistake" required="1"/>
+                                    <field name="mistake_value" force_save="1" invisible="1"/>
+                                    <field name="mistake_detail"/>
+                                    <field name="currency_id" required="1"/>
+                                    <field name="member_user" />
+                                    <field name="amount" />
+                                    <field name="amount_lcy" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="employee_id" required="1"/>
+                                        <field name="mistake" required="1"/>
+                                        <field name="mistake_value" force_save="1" invisible="1"/>
+                                        <field name="mistake_detail"/>
+                                        <field name="currency_id" required="1"/>
+                                        <field name="member_user" />
+                                        <field name="amount" />
+                                        <field name="amount_lcy" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_mistake_entries_deduction_ph_upload_view_tree" model="ir.ui.view">
+        <field name="name">payroll.mistake.entries.deduction.ph.upload.view.tree</field>
+        <field name="model">payroll.mistake.entries.header</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="created_by" />
+                <field name="date" />
+                <field name="website_id" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_mistake_entries_deduction_ph_upload_view_form" model="ir.ui.view">
+        <field name="name">payroll.mistake.entries.deduction.ph.upload.view.form</field>
+        <field name="model">payroll.mistake.entries.header</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <!-- <button name="action_release" string="Confirm" type="object" class="btn-primary"/> -->
+                </header>
+                <sheet>
+                    <group>
+                        <field name="created_by" />
+                        <field name="date" />
+                        <field name="file" />
+                        <button name="insert_file_to_details" string="Import to Line" type="object" class="btn-primary"/>
+                    </group>
+                    <notebook>
+                        <page name="mistakedetails_ph_upload" string="Details">
+                            <field name="details_ids">
+                                <tree editable="bottom">
+                                    <field name="employee_id_2" />
+                                    <field name="department_id" />
+                                    <field name="deduction_id" />
+                                    <field name="amount" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="employee_id_2" />
+                                        <field name="department_id" />
+                                        <field name="deduction_id" />
+                                        <field name="amount" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sequence -->
+    <record id="payroll_mistake_entries_header_sequence" model="ir.sequence">
+        <field name="name">Mistake Entries</field>
+        <field name="code">payroll.mistake.entries.header</field>
+        <field name="prefix">ME-</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- <record id="mistake_entries_record_rule_departments_and_categories" model="ir.rule">
+        <field name="name">See only mistake entries with specific departments and categories</field>
+        <field name="model_id" ref="model_payroll_mistake_entries_header"/>
+        <field name="domain_force">
+            [
+                '|', 
+                ('department_id', 'in', user.department_ids.ids) if user.department_ids else (1, '=', 1),
+                ('category_id', 'in', user.employee_category_ids.ids) if user.employee_category_ids else (1, '=', 1)
+            ]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+</odoo>

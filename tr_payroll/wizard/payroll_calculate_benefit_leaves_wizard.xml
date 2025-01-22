@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_calculate_benefit_leaves_wizard_view_form" model="ir.ui.view">
+        <field name="name">payroll.calculate.benefit.leaves.wizard.view.form</field>
+        <field name="model">payroll.calculate.benefit.leaves.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="calculate_until_date" />
+                        <field name="employee" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="calculate_benefit_leaves" string="Calculate Benefit and Leaves" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

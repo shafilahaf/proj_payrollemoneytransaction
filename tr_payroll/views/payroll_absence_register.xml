@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_absence_register_view_tree" model="ir.ui.view">
+        <field name="name">payroll.absence.register.view.tree</field>
+        <field name="model">payroll.absence.register</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="employee_id" />
+                <field name="request_type" />
+                <field name="request_date" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_absence_register_view_form" model="ir.ui.view">
+        <field name="name">payroll.absence.register.view.form</field>
+        <field name="model">payroll.absence.register</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="cancel_request" string="Cancel" type="object" class="btn-secondary" />
+                    <field name="status" widget="statusbar" statusbar_visible="1" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="employee_id" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="request_type" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="request_date" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="absence_start_date" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="absence_end_date" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="duration" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="remarks" attrs="{'readonly': [('status', '=', '5')]}"/>
+                        <field name="internal_notes" attrs="{'readonly': [('status', '=', '5')], 'invisible': [('internal_notes', '=', False)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sequence -->
+    <record id="payroll_absence_register_sequence" model="ir.sequence">
+        <field name="name">payroll.absence.register.sequence</field>
+        <field name="code">payroll.absence.register</field>
+        <field name="prefix">AR-</field>
+        <field name="padding">4</field>
+    </record>
+
+</odoo>

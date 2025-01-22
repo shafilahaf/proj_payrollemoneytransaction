@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_employee_shift_benefit_view_tree" model="ir.ui.view">
+        <field name="name">payroll.employee.details.view.tree</field>
+        <field name="model">payroll.employee.details</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="type" />
+                <field name="type_text" />
+                <field name="active_date" />
+                <field name="expired_date" />
+                <field name="calculation_date" />
+                <field name="quantity" />
+                <field name="currency" />
+                <field name="amount" />
+                <field name="isActive" />
+                <field name="employee_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_employee_shift_benefit_view_search" model="ir.ui.view">
+        <field name="name">payroll.employee.details.view.search</field>
+        <field name="model">payroll.employee.details</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="employee_id"/>
+                <field name="type_text" />
+            </search>
+        </field>
+    </record>
+
+    <!-- <record id="payroll_employee_shift_benefit_view_form" model="ir.ui.view">
+        <field name="name">payroll.employee.details.view.form</field>
+        <field name="model">payroll.employee.details</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="type" />
+                        <field name="active_date" />
+                        <field name="expired_date" />
+                        <field name="calculation_date" />
+                        <field name="quantity" />
+                        <field name="currency" />
+                        <field name="amount" />
+                        <field name="isActive" />
+                        <field name="employee_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+
+</odoo>

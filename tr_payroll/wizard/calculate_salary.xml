@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_calculate_salary_wizard_view_form" model="ir.ui.view">
+        <field name="name">payroll.calculate.salary.wizard.view.form</field>
+        <field name="model">payroll.calculate.salary.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="calculate_date" />
+                        <field name="employee_ids" />
+                        <field name="category_ids" />
+                        <field name="department_ids" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="calculate_salary" string="Calculate Salary" type="object" class="btn-primary" />
+                    <!-- <button name="convert_attendance_device_to_att_log" string="Convert Att Device to Att Log" type="object" class="btn-primary" /> -->
+                    <!-- <button name="auto_create_user" string="Auto Create User" type="object" class="btn-primary" /> -->
+                    <button name="recalculate_late_salary" string="Recalculate Late Salary" type="object" class="btn-primary" />
+                    <button name="fill_last_date_leave" string="Fill Last Date Leave" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

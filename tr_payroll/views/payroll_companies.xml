@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="payroll_companies_view_tree" model="ir.ui.view">
+        <field name="name">payroll.companies.view.tree</field>
+        <field name="model">payroll.companies</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="address" />
+                <field name="address2" />
+                <field name="blocked" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_companies_view_form" model="ir.ui.view">
+        <field name="name">payroll.companies.view.form</field>
+        <field name="model">payroll.companies</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <field name="picture" widget="image" class="oe_right oe_avatar" options='{"web.image": true}'/>
+                    <div class="oe_title">
+                        <label for="name" string="Company Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="o_text_overflow" name="name" />
+                            </div>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="address" placeholder="Address"/>
+                        <field name="address2" placeholder="Address 2"/>
+                        <field name="blocked"/>
+                        <field name="active" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page name="manage_website" string="Websites">
+                            <field name="website_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- payroll_companies search view -->
+    <record id="payroll_companies_view_search" model="ir.ui.view">
+        <field name="name">payroll.companies.view.search</field>
+        <field name="model">payroll.companies</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+                <field name="address" />
+                <field name="address2" />
+            </search>
+        </field>
+    </record>
+</odoo>

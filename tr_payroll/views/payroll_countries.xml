@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_countries_view_tree" model="ir.ui.view">
+        <field name="name">payroll.countries.view.tree</field>
+        <field name="model">payroll.countries</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    
+    <record id="payroll_countries_view_form" model="ir.ui.view">
+        <field name="name">payroll.countries.view.form</field>
+        <field name="model">payroll.countries</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                     attrs="{'invisible' : [('active', '=', True)]}"/>
+                    <group>
+                        <field name="name" />
+                        <field name="active" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page name="manage_city" string="Cities">
+                            <field name="city_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_countries_view_search" model="ir.ui.view">
+        <field name="name">payroll.countries.view.search</field>
+        <field name="model">payroll.countries</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="active" string="Archived" domain="[('active', '=', False)]"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>

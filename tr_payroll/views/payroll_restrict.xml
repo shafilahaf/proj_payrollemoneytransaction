@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_restrict_view_tree" model="ir.ui.view">
+        <field name="name">payroll.restrict.view.tree</field>
+        <field name="model">payroll.restrict</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="users" />
+                <field name="employee_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="payroll_restrict_view_form" model="ir.ui.view">
+        <field name="name">payroll.restrict.view.form</field>
+        <field name="model">payroll.restrict</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group name="employee_data" string="Employee's Data">
+                            <field name="users" />
+                            <field name="employee_id" />
+                            <field name="position" />
+                            <field name="department_id" />
+                            <field name="category_id" />
+                        </group>
+                    </group>
+                    <group name="permitted" string="Allowed Scope">
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="category_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_restrict_view_search" model="ir.ui.view">
+        <field name="name">payroll.restrict.view.search</field>
+        <field name="model">payroll.restrict</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="users" />
+                <field name="employee_id" />
+            </search>
+        </field>
+    </record>
+
+    <record id="ir_cron_payroll_restrict_update" model="ir.cron">
+        <field name="name">Periodic Payroll Restrict Update</field>
+        <field name="model_id" ref="model_payroll_restrict"/>
+        <field name="state">code</field>
+        <field name="code">model.get_all_users()</field>
+        <field name="interval_type">minutes</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="True"/>
+    </record>
+
+</odoo>

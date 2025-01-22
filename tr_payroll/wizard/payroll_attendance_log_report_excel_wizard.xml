@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_attendance_log_excel_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">payroll.attendance.log.excel.report.wizard.view.form</field>
+        <field name="model">payroll.attendance.log.report.excel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="department_id" />
+                        <field name="category_id" />
+                        <field name="employee_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Export Attendance Log Excel" name="payroll_attendance_log_report" type="object" class="btn-primary" />
+                    <button string="Export PH Internal Attendance Log Excel" name="payroll_PH_internal_attendance_log_report" type="object" class="btn-primary" />
+                    <button string="Export PH Report New Attendance Log Excel" name="payroll_PH_report_new_attendance_log_report" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
