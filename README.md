@@ -1,7 +1,7 @@
 # Payroll System Project & Backoffice Transaction
 
 ![image](https://github.com/user-attachments/assets/9a128cd9-ee88-48f8-b7ac-f5361c8dfe6d)
-Url : [Payroll and Backoffice Transaction](https://payroll.aplikasierp.online/web?db=Payroll) [username : admin, password: admin (without data because confidential) ]
+Url : [Payroll and Backoffice Transaction](https://payroll.aplikasierp.online/web?db=Payroll)
 
 ## Overview
 This project is designed to manage employee payroll and allows the admin to input financial transactions via the backoffice. It calculates salaries, taxes, bonuses, deductions, and enables the entry of backoffice transactions for managing financial operations related to payroll and employee benefits.
